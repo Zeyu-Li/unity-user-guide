@@ -10,10 +10,13 @@ I will start at the beginning and work my way through the variations avenues you
 
 1. [Installation](#install)
 2. [General](#main)
-3. 2D
-   * General
+3. [2D](#2D)
+   * [General](#2dg)
+   * [Movement](#move)
    * Pixelated
 4. 3D
+   1. General
+   2. 
 5. [Collaboration](#team)
    * [Unity's Collab](#unity) (recommended)
    * [GitHub](#git)
@@ -41,7 +44,25 @@ When installing Unity, it might ask you to install **Visual Studio** along-side 
 Debug.Log() // logs to Unity console
 ```
 
-is your friend. 
+is your friend. Also organize your scenes by naming them or using empties as folders (+1 organization). Now, it is time to pick, 2D or 3D. (As a beginner, start with 2D)
+
+<a name="2D"></a>
+
+### 2D
+
+<a name="2dg"></a>
+
+#### General
+
+So you've decide to make a 2D game. Great! Who needs modelling and lighting (It's a lot of work anyways)? 
+
+2D games are secretly 3D, what does that mean? Think of Unity 2D as a bunch of layers like in Photoshop, Gimp, After Effects, or Illustrator. The closest to the camera is picked up first and blocks the ones behind it. As a 2D world, lighting is global (unless you want enable an experimental local lighting feature). Now let's make a play and make it move!
+
+<a name="move"></a>
+
+#### Movement
+
+
 
 <a name="team"></a>
 
