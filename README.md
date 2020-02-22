@@ -12,6 +12,7 @@ I will start at the beginning and work my way through the variations avenues you
 2. [General](#main)
 3. [2D](#2D)
    * [General](#2dg)
+   * [Sprites](#sprites)
    * [Movement](#move)
    * Pixelated
 4. 3D
