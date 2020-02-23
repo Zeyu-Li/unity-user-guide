@@ -6,26 +6,31 @@ This is a [Unity](https://unity.com/) User guide
 
 I will start at the beginning and work my way through the variations avenues you could have about your game. I will go through 2D and 3D games along with general tips and tricks for solo and team-based projects. Without future ado, let's begin! 
 
+<a name="top"></a>
+
 ## Index
 
 1. [Installation](#install)
 2. [General](#main)
-3. [2D](#2D)
+3. [Unity Editor Overview](#unity)
+4. [2D](#2D)
    * [General](#2dg)
    * [Sprites](#sprites)
    * [Movement](#move)
    * Pixelated
-4. 3D
-   1. General
-   2. 
-5. [Collaboration](#team)
+5. 3D
+   1. [General](#5a)
+   2.    
+6. [Building](#build)
+7. [Cloning Guide](#guide)
+8. [Collaboration](#team)
    * [Unity's Collab](#unity) (recommended)
    * [GitHub](#git)
-6. [Resources](#help)
+9. [Resources](#help)
 
 <a name="install"></a>
 
-### Installation
+### 1. Installation
 
 Before installing, note that Unity is completely free forever, if you or your company makes less than $100 000 (USD). 
 
@@ -37,7 +42,7 @@ When installing Unity, it might ask you to install **Visual Studio** along-side 
 
 <a name="main"></a>
 
-### General
+### 2. General
 
 **Unity** is a 3D game engine built in **C#** but can be used for 2D. Before you freak out about programming, let me assure, you it is quite trivial. If you have programmed before especially in C++, it is a huge plus. If you have not, don't worry, it's just a bunch of copy and pasting. The most important thing is don't be frustrated and 
 
@@ -47,27 +52,97 @@ Debug.Log() // logs to Unity console
 
 is your friend. Also organize your scenes by naming them or using empties as folders (+1 organization). Now, it is time to pick, 2D or 3D. (As a beginner, start with 2D)
 
+<a name="unity"></a>
+
+### 3. Unity Editor Overview
+
+Unity is a panel based application. These panels can be rearranged however you like and saved as default. 
+
+![layout](layout.png)
+
+This is my default setup. The **Scene** panel is the most important viewport. This is where you modify the scene. The **Game** scene only turns on if you hit play. It is a preview of what the user will see if you build the current scene.
+
+On the right hand side, we have the **Project** directory (folder) panel on the bottom. This is where all your assets are (ie art, music, scripts, etc.). The **Hierarchy** is like a layers panel in Photoshop. It is an arrangement of all elements in the scene. For every element of the scene can be hidden from the view by hitting eye button when hovering on the element. The lock button is the pointer icon. The **Inspector** contains all modifiable aspect of an element along with info. This is where you drag scripts in the element.
+
+Other panels include a console, which will output when the game is run. The **Animator** and **Animation** go hand in hand and creates animation for sprites. 
+
 <a name="2D"></a>
 
-### 2D
+### 4. 2D
 
 <a name="2dg"></a>
 
-#### General
+#### 	4a General
 
 So you've decide to make a 2D game. Great! Who needs modelling and lighting (It's a lot of work anyways)? 
 
-2D games are secretly 3D, what does that mean? Think of Unity 2D as a bunch of layers like in Photoshop, Gimp, After Effects, or Illustrator. The closest to the camera is picked up first and blocks the ones behind it. As a 2D world, lighting is global (unless you want enable an experimental local lighting feature). Now let's make a play and make it move!
+2D games are secretly 3D, what does that mean? Think of Unity 2D as a bunch of layers like in Photoshop, Gimp, After Effects, or Illustrator. The closest to the camera is picked up first and blocks the ones behind it. As a 2D world, lighting is global (unless you want enable an experimental local lighting feature). To start a new 2D game, click **New** and select 2D on the pop-up screen and use the desired directory (or follow my cloning [guide](#guide)). This may take some time, but after Unity finishes installing itself, we can get started. Now let's make a player and make it move!
+
+<a name="spr"></a>
+
+#### 	4b Sprites
+
+Sprites are what make up the visuals of the game. These could be png or jpeg (recommended because of small size) file. You can make your own and drag them into an **Artworks folder**.
+
+If you have multiple sprites on a picture file, you have what is called a sprite sheet. These could be useful because it saves space. 
 
 <a name="move"></a>
 
-#### Movement
+#### 	4c Movement
 
+Movement is critical in all games, whether the movement is limited to left or right, or games that in 3D. On the internet there are may sources that claim the perfect jump, but only you can decide that based on the gameplay. 
 
+To start off with, make a new folder of scripts
+
+<a name="3D"></a>
+
+### 5. 3D
+
+#### 	5a General
+
+3D, it's where we live. Good for you for deciding to go 3D. Before we go any further, it is not recommended that you start off with a 3D project if you just started game design. 
+
+<a name="build"></a>
+
+### 6. Build
+
+So you are finished your game. You need to disturbed the game. This is done through building the game. 
+
+1. Go to **File**, **Build Settings...**
+
+2. Select the scenes that you want to build
+
+   ![build](build.png)
+
+3. Select the desired **Platform**
+
+4. **Build** (**And Run** if you want to run it)
+
+5. Select the folder and wait for it to build
+
+<a name="guide"></a>
+
+### 7. Cloning Guide
+
+From my [GitHub](https://github.com/Zeyu-Li?tab=repositories):
+
+1. Find the right Unity Repo to clone from my account (ie [Unity-Template-2D-2019_3](https://github.com/Zeyu-Li/Unity-Template-2D-2019_3), [Unity-Template-3D-2019](https://github.com/Zeyu-Li/Unity-Template-2D-2019_3)) 
+
+2. Download ZIP after clicking Clone or download
+
+   ![download](download.png)
+
+3. Unzip and move to desired directory
+
+4. Go on Unity Hub and click **Add** and located to directory
+
+5. The project should appear in Projects and it is done
+
+6. Click on the project to open it
 
 <a name="team"></a>
 
-### Collaboration
+### 8. Collaboration
 
 <a name="unity"></a>
 
@@ -95,9 +170,11 @@ Otherwise if you are a masochistic and decide to GitHub, here are some general p
 6. Remember you can go back to a previous working version
 7. Have fun and don't fight with your team members
 
+[🔝 Back to Top](#top)
+
 <a name="Help"></a>
 
-### Resources
+### 9. Resources
 
 * The [Unity User Manual](https://docs.unity3d.com/Manual/index.html) provides some great documentation with code that can for the most part be copied and pasted
 * Brackeys [YouTube channel](https://www.youtube.com/user/Brackeys)
