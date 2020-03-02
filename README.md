@@ -76,7 +76,7 @@ Other panels include a console, which will output when the game is run. The **An
 
 So you've decide to make a 2D game. Great! Who needs modelling and lighting (It's a lot of work anyways)? 
 
-2D games are secretly 3D, what does that mean? Think of Unity 2D as a bunch of layers like in Photoshop, Gimp, After Effects, or Illustrator. The closest to the camera is picked up first and blocks the ones behind it. As a 2D world, lighting is global (unless you want enable an experimental local lighting feature). To start a new 2D game, click **New** and select 2D on the pop-up screen and use the desired directory (or follow my cloning [guide](#guide)). This may take some time, but after Unity finishes installing itself, we can get started. Now let's make a player and make it move!
+2D games are secretly 3D, what does that mean? Think of Unity 2D as a bunch of layers like in Photoshop, Gimp, After Effects, or Illustrator. The closest to the camera is picked up first and blocks the ones behind it. As a 2D world, lighting is global (unless you want enable an experimental local lighting feature). To start a new 2D game, click **New** and select 2D on the pop-up screen and use the desired directory (or follow my cloning [guide](#guide) so to not start from starch). This may take some time, but after Unity finishes installing itself, we can get started. Now let's make a player and make it move!
 
 <a name="spr"></a>
 
@@ -84,7 +84,7 @@ So you've decide to make a 2D game. Great! Who needs modelling and lighting (It'
 
 Sprites are what make up the visuals of the game. These could be png or jpeg (recommended because of small size) file. You can make your own and drag them into an **Artworks folder**.
 
-If you have multiple sprites on a picture file, you have what is called a sprite sheet. These could be useful because it saves space. 
+If you have multiple sprites on a picture file, you have what is called a sprite sheet. These could be useful because it saves space. Unity comes with a sprite editor that can cut the sprite sheet into multiple sprites. 
 
 <a name="move"></a>
 
@@ -116,9 +116,11 @@ So you are finished your game. You need to disturbed the game. This is done thro
 
 3. Select the desired **Platform**
 
-4. **Build** (**And Run** if you want to run it)
+4. You can customize the company name, product name, icon, and cursor
 
-5. Select the folder and wait for it to build
+5. **Build** (**And Run** if you want to run it)
+
+6. Select the folder and wait for it to build
 
 <a name="guide"></a>
 
