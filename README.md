@@ -17,16 +17,18 @@ I will start at the beginning and work my way through the variations avenues you
    * [General](#2dg)
    * [Sprites](#spr)
    * [Movement](#move)
+   * Prefabs
    * Pixelated
 5. 3D
    1. [General](#5a)
-   2.    
-6. [Building](#build)
-7. [Cloning Guide](#guide)
-8. [Collaboration](#team)
+   2.     
+6. [Scripting](#script)
+7. [Building](#build)
+8. [Cloning Guide](#guide)
+9. [Collaboration](#team)
    * [Unity's Collab](#unity) (recommended)
    * [GitHub](#git)
-9. [Resources](#help)
+10. [Resources](#help)
 
 <a name="install"></a>
 
@@ -147,6 +149,21 @@ From the top, there are many icons, we will go through each of them
 * Eraser - Erases
 * Paint Bucket - Floods with active brush (Like Photoshop)
 
+
+
+To layer tiles, 
+
+* Right click on the tile map -> 2D -> Tilemap for however many more layers you need
+
+
+
+To set a layer as a solid with collision, 
+
+1. go to the layer you want to make solid
+2. Add Component -> search add Tilemap Collider 2D
+
+
+
 Resources: [Brackeys](https://www.youtube.com/watch?v=ryISV_nH8qw)
 
 <a name="move"></a>
@@ -155,7 +172,16 @@ Resources: [Brackeys](https://www.youtube.com/watch?v=ryISV_nH8qw)
 
 Movement is critical in all games, whether the movement is limited to left or right, or games that in 3D. On the internet there are may sources that claim the perfect jump, but only you can decide that based on the gameplay. 
 
-To start off with, make a new folder of scripts
+To start off with;
+
+1. make a new folder called **scripts**
+2. right click -> Create -> C# Script
+
+Next, you want to open the script by double clicking on it
+
+This will either open the script in MonoDevelop or Visual Studio (to find out more about scripting, go to the [scripting section](#script))
+
+
 
 <a name="3D"></a>
 
@@ -165,9 +191,54 @@ To start off with, make a new folder of scripts
 
 3D, it's where we live. Good for you for deciding to go 3D. Before we go any further, it is not recommended that you start off with a 3D project if you just started game design. 
 
+<a name="script"></a>
+
+### 6. Scripting
+
+Unity is based on C# and is very much a c-styled programming language. That means it resembles programs that are written in C, C++, F#, or Java. 
+
+The main thing to know though is Unity's implementation of C#
+
+If you create a script, automatically, it will be drawn from a template that looks similar to the following:
+
+```c#
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class movement : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
+```
+
+You will notice that at the top there are imports from Unity's other libraries using the **using** keyword. Afterwards, Unity defines the script as a class*. The class is defined as public so other scripts and Unity can assess and utilize this class. The name you gave the script will follow the **class** keyword. Afterwards, **MonoBehaviour** is defined as what movement inherits from. Think of this as your script **extending** from class MonoBehaviour. 
+
+
+
+Below that and indented, we see void Start() and void Update(). As the comments suggest, void Start() occurs before the first frame update and void Update() is called once per frame. Note **void** means there will not be a return value (ie no return statement).
+
+Also, there are different methods of MonoBehaviour such as **FixedUpdate()** that may update more or less than once per frame. This will be important for any physics related functions
+
+
+
+\* A class is a data structure that holds a collection of information on the class (ie, its attributes and methods). 
+
+A list of other functions and methods that can be used can be found on the [Unity Documentation](https://docs.unity3d.com/ScriptReference/MonoBehaviour.html) site
+
 <a name="build"></a>
 
-### 6. Build
+### 7. Build
 
 So you are finished your game. You need to disturbed the game. This is done through building the game. 
 
@@ -187,7 +258,7 @@ So you are finished your game. You need to disturbed the game. This is done thro
 
 <a name="guide"></a>
 
-### 7. Cloning Guide
+### 8. Cloning Guide
 
 From my [GitHub](https://github.com/Zeyu-Li?tab=repositories):
 
@@ -207,7 +278,7 @@ From my [GitHub](https://github.com/Zeyu-Li?tab=repositories):
 
 <a name="team"></a>
 
-### 8. Collaboration
+### 9. Collaboration
 
 <a name="unity"></a>
 
@@ -239,7 +310,7 @@ Otherwise if you are a masochistic and decide to GitHub, here are some general p
 
 <a name="Help"></a>
 
-### 9. Resources
+### 10. Resources
 
 * The [Unity User Manual](https://docs.unity3d.com/Manual/index.html) provides some great documentation with code that can for the most part be copied and pasted
 * Brackeys [YouTube channel](https://www.youtube.com/user/Brackeys)
