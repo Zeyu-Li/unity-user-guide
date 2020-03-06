@@ -6,6 +6,8 @@ This is a [Unity](https://unity.com/) User guide
 
 I will start at the beginning and work my way through the variations avenues you could have about your game. I will go through 2D and 3D games along with general tips and tricks for solo and team-based projects. Without future ado, let's begin! 
 
+
+
 <a name="top"></a>
 
 ## Index
@@ -17,18 +19,34 @@ I will start at the beginning and work my way through the variations avenues you
    * [General](#2dg)
    * [Sprites](#spr)
    * [Movement](#move)
+   * [Camera](#camera)
+   * [Prefabs](#pref)
+   * [Particle System](#partsys)
+   * [Collectibles](#coll)
+   * [Animation](#anim)
+   * [Events](#events)
+   * [Pixelated](#pix)
+   * Linking Scenes
+5. [3D](#3D)
+   * [General](#5a)
+   * 3D Models & Bodies
+   * Movement
+   * Camera
    * Prefabs
-   * Pixelated
-5. 3D
-   1. [General](#5a)
-   2.     
-6. [Scripting](#script)
-7. [Building](#build)
-8. [Cloning Guide](#guide)
-9. [Collaboration](#team)
-   * [Unity's Collab](#unity) (recommended)
-   * [GitHub](#git)
-10. [Resources](#help)
+   * Particle Systems
+   * Events
+   * [Collectibles](#3coll)
+   * Odds and Ends
+6. [Title Screen](#title)
+7. [Scripting](#script)
+8. [Building](#build)
+9. [Cloning Guide](#guide)
+10. [Collaboration](#team)
+    * [Unity's Collab](#unity) (recommended)
+    * [GitHub](#git)
+11. [Resources](#help)
+
+
 
 <a name="install"></a>
 
@@ -42,6 +60,8 @@ If you want a new version of Unity, go to the Unity Hub and click the **Installs
 
 When installing Unity, it might ask you to install **Visual Studio** along-side Unity. If you have Visual Studio, do not install again, it should automatically detect the current VS on the system. Otherwise, it is optional and I've heard that MonoDevelop (comes with Unity) is good enough for handling the task Unity puts forth. 
 
+
+
 <a name="main"></a>
 
 ### 2. General
@@ -53,6 +73,8 @@ Debug.Log() // logs to Unity console
 ```
 
 is your friend. Also organize your scenes by naming them or using empties as folders (+1 organization). Now, it is time to pick, 2D or 3D. (As a beginner, start with 2D)
+
+
 
 <a name="unity"></a>
 
@@ -68,6 +90,8 @@ On the right hand side, we have the **Project** directory (folder) panel on the 
 
 Other panels include a console, which will output when the game is run. The **Animator** and **Animation** go hand in hand and creates animation for sprites. 
 
+
+
 <a name="2D"></a>
 
 ### 4. 2D
@@ -81,6 +105,8 @@ So you've decide to make a 2D game. Great! Who needs modelling and lighting (It'
 2D games are secretly 3D, what does that mean? Think of Unity 2D as a bunch of layers like in Photoshop, Gimp, After Effects, or Illustrator. The closest to the camera is picked up first and blocks the ones behind it. As a 2D world, lighting is global (unless you want enable an experimental local lighting feature). To start a new 2D game, click **New** and select 2D on the pop-up screen and use the desired directory (or follow my cloning [guide](#guide) so to not start from starch). This may take some time, but after Unity finishes installing itself, we can get started. Now let's make a player and make it move!
 
 *Note, part of the tutorial (2D) follows this [repo](https://github.com/Zeyu-Li/Unity-Template-2D-2019_3): [Unity-Template-2D-2019_3](https://github.com/Zeyu-Li/Unity-Template-2D-2019_3)
+
+
 
 <a name="spr"></a>
 
@@ -162,9 +188,9 @@ To set a layer as a solid with collision,
 1. go to the layer you want to make solid
 2. Add Component -> search add Tilemap Collider 2D
 
-
-
 Resources: [Brackeys](https://www.youtube.com/watch?v=ryISV_nH8qw)
+
+
 
 <a name="move"></a>
 
@@ -181,19 +207,109 @@ Next, you want to open the script by double clicking on it
 
 This will either open the script in MonoDevelop or Visual Studio (to find out more about scripting, go to the [scripting section](#script))
 
+https://www.youtube.com/watch?v=dwcT-Dch0bA
+
+
+
+<a name="camera"></a>
+
+#### 	4d Camera
+
+When implementing a camera, there are two options, however, we will through the harder option first to get use to how cameras work
+
+1. We will create a camera follow script
+
+   
+
+   OR
+
+   
+
+2. Use the [Cinemachine Extension](https://assetstore.unity.com/packages/essentials/cinemachine-79898) 
+
+
+
+Resource: https://www.youtube.com/watch?v=MFQhpwc6cKE or https://www.youtube.com/watch?v=2jTY11Am0Ig
+
+<a name="pref"></a>
+
+#### 	4e Prefab
+
+A prefab is simply a clone that can be dragged to the scene
+
+
+
+<a name="partsys"></a>
+
+#### 	4f Particle System
+
+A particle system adds an extra layer of immersion that is quite simple in Unity. 
+
+
+
+<a name="coll"></a>
+
+#### 4g Collectibles
+
+There are two parts to a collectible, 
+
+a. collection of the item
+
+b. the storage of the item in inventory
+
+
+
+<a name="anim"></a>
+
+#### 4h Animation
+
+Animation is critical in creating any game that does not look static. In Unity, animation is handled by 
+
+
+
+<a name="events"></a>
+
+#### 4i Events
+
+
+
+
+
+<a name="pix"></a>
+
+#### 4j Pixelated
+
+
+
 
 
 <a name="3D"></a>
 
 ### 5. 3D
 
+<a name="5a"></a>
+
 #### 	5a General
 
 3D, it's where we live. Good for you for deciding to go 3D. Before we go any further, it is not recommended that you start off with a 3D project if you just started game design. 
 
+<a name="5b"></a>
+
+#### 	5b 
+
+
+
+<a name="title"></a>
+
+### 6. Title Screen
+
+One of the last things to do is to create a title screen 
+
+
+
 <a name="script"></a>
 
-### 6. Scripting
+### 7. Scripting
 
 Unity is based on C# and is very much a c-styled programming language. That means it resembles programs that are written in C, C++, F#, or Java. 
 
@@ -234,11 +350,19 @@ Also, there are different methods of MonoBehaviour such as **FixedUpdate()** tha
 
 \* A class is a data structure that holds a collection of information on the class (ie, its attributes and methods). 
 
-A list of other functions and methods that can be used can be found on the [Unity Documentation](https://docs.unity3d.com/ScriptReference/MonoBehaviour.html) site
+A list of other functions and methods that can be used can be found on the [Unity Documentation](https://docs.unity3d.com/ScriptReference/MonoBehaviour.html) site, however, the most important thing about learning and debugging Unity is to use
+
+```c#
+Debug.Log() // logs to Unity console
+```
+
+When using this, after running the game, it will output to Unity's debug console
+
+
 
 <a name="build"></a>
 
-### 7. Build
+### 8. Build
 
 So you are finished your game. You need to disturbed the game. This is done through building the game. 
 
@@ -256,9 +380,11 @@ So you are finished your game. You need to disturbed the game. This is done thro
 
 6. Select the folder and wait for it to build
 
+
+
 <a name="guide"></a>
 
-### 8. Cloning Guide
+### 9. Cloning Guide
 
 From my [GitHub](https://github.com/Zeyu-Li?tab=repositories):
 
@@ -276,9 +402,11 @@ From my [GitHub](https://github.com/Zeyu-Li?tab=repositories):
 
 6. Click on the project to open it
 
+
+
 <a name="team"></a>
 
-### 9. Collaboration
+### 10. Collaboration
 
 <a name="unity"></a>
 
@@ -291,6 +419,8 @@ If you need to collaborate, the best way is to use Unity's Collab feature
 ![collab](images/collab.png)
 
 However, note that this only supports 4 people (which is usually enough because only people that will contribute to the codebase should need it)
+
+
 
 <a name='git'></a>
 
@@ -308,9 +438,11 @@ Otherwise if you are a masochistic and decide to GitHub, here are some general p
 
 [🔝 Back to Top](#top)
 
+
+
 <a name="Help"></a>
 
-### 10. Resources
+### 11. Resources
 
 * The [Unity User Manual](https://docs.unity3d.com/Manual/index.html) provides some great documentation with code that can for the most part be copied and pasted
 * Brackeys [YouTube channel](https://www.youtube.com/user/Brackeys)
