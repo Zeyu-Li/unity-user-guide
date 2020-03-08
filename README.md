@@ -329,7 +329,30 @@ A background can be achieved by placed in the camera and setting the **Order in 
 
 When implementing a camera, there are two options, however, we will through the harder option first to get use to how cameras work
 
-1. We will create a camera follow script
+1. We will create a camera follow script with the following:
+
+   ```c#
+   // selects targe to be fixed on
+   public Transform target;
+   public float smoothing = 0.12f;
+   
+   // because it is fixed to player, we want to move in from by 10 layers be default
+   public Vector3 offset = new Vector3(0f,0f,-10f);
+   
+   void FixedUpdate() {
+       Vector3 desiredP = target.position + offset;
+   
+       // interpolate movement
+       Vector3 smoothP = Vector3.Lerp(transform.position, desiredP, smoothing);
+       transform.position = smoothP;
+   
+       // will move in direction of target
+       // comment out if you don't like the jitters
+       transform.LookAt(target);
+   }
+   ```
+
+   You will have to drag the player to target and change the smoothing if you like
 
    
 
@@ -338,6 +361,24 @@ When implementing a camera, there are two options, however, we will through the 
    
 
 2. Use the [Cinemachine Extension](https://assetstore.unity.com/packages/essentials/cinemachine-79898) 
+
+To use Cinemachine, one must first install the extension as it does not come in with Unity natively. To do this, 
+
+1. window -> Package Manager -> **Search: **Cinemachine -> click install
+
+Now to use it
+
+1. Cinemachine -> Create 2D Camera
+2. Embed CM vcam into main camera (optional)
+3. Go to CM vcam and put the player in the **Follow** 
+4. Try it out
+5. If you want the character directly in the center of the camera, turn down all **damping** and **dead zone** to 0 (these settings are in **Body**)
+6. **Screen** x and y, offsets from center
+7. **Soft zone** changes the max distance from center before snapping the player to edge
+8. **Dead zone** is how far you can move the character before the camera moves along-side the player
+9. **Damping** is the smoothness of the camera movements
+10. **Look ahead** is the direction the player is moving towards
+11. Play around with these setting
 
 
 
@@ -348,6 +389,10 @@ Resource: https://www.youtube.com/watch?v=MFQhpwc6cKE or https://www.youtube.com
 #### 	4e Prefab
 
 A prefab is simply a clone that can be dragged to the scene
+
+This means that things in other scenes can be reused
+
+To make a prefab, just drag the desired prefab object from scene to the prefabs folder
 
 
 
