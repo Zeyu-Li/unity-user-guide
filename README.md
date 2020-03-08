@@ -20,23 +20,27 @@ I will start at the beginning and work my way through the variations avenues you
    * [Sprites](#spr)
    * [Movement](#move)
    * [Camera](#camera)
+     * Background
    * [Prefabs](#pref)
    * [Particle System](#partsys)
    * [Collectibles](#coll)
    * [Animation](#anim)
    * [Events](#events)
    * [Pixelated](#pix)
-   * Linking Scenes
+   * [Music & Sounds](#music)
+   * [Parallax](#par)
+   * [Odds and Ends](#odds)
 5. [3D](#3D)
    * [General](#5a)
-   * 3D Models & Bodies
-   * Movement
-   * Camera
-   * Prefabs
-   * Particle Systems
-   * Events
+   * [3D Models & Bodies](#5b)
+   * [Movement](#5c)
+   * [Camera](#5d)
+   * [Prefabs](#5e)
+   * [Particle Systems](#5f)
+   * [Events](#5g)
    * [Collectibles](#3coll)
-   * Odds and Ends
+   * [Music & Sounds](#3music)
+   * [Odds and Ends](#3odds)
 6. [Title Screen](#title)
 7. [Scripting](#script)
 8. [Building](#build)
@@ -200,20 +204,122 @@ Movement is critical in all games, whether the movement is limited to left or ri
 
 To start off with;
 
+Set your player to be a rigid body with colliders
+
+This can be done if you;
+
+1. Select the player and add a Rigidbody 2D
+
+   ![rigid](C:\Users\zeyul\Documents\GitHub\unity-user-guide\images\rigid.png)
+
+2. Open up the Rigidbody 2D and go to constraints. If you want the player to not rotate in 2D, then select **Freeze Rotation Z**
+
+3. Otherwise, add a **Collider 2D** to fit the player. Depending on how your player's form, different shapes may be better. Try the different collider options to see which ones fit best. Most of the time, a **Box Collider 2D** will work just fine. Also note that you can use multiple colliders, but remember, this is computationally more expensive.
+
+4. Also note that if you are not satisfied with Unity's default collider size, you can change the size by changing the **size** attribute
+
+Now for the movement:
+
 1. make a new folder called **scripts**
-2. right click -> Create -> C# Script
+2. right click -> Create -> C# Script -> call it movement or something
 
 Next, you want to open the script by double clicking on it
 
 This will either open the script in MonoDevelop or Visual Studio (to find out more about scripting, go to the [scripting section](#script))
 
-https://www.youtube.com/watch?v=dwcT-Dch0bA
+In the movement class, put
+
+```c#
+// inits
+// hoziontal speed
+public float speed = 10f;
+
+// vertical jump
+public float jumpForce = 10f;
+
+// different jump heights for how long jump button is pressed
+// change it as you change gravity
+public float jumpCheck = .2f;
+// is ground check
+public float checkRadius = 0.3f;
+
+// ground jump check
+public bool isGrounded;
+public Transform feetPos;
+public LayerMask whatIsGround;
+
+// so that infin jumps are not a thing
+private float jumpCheckCounter;
+private bool jumping;
+private float moveInput;
+
+// inits rigid body
+private Rigidbody2D rb;
+
+void Start() {
+    rb = GetComponent<Rigidbody2D>();
+}
+
+void Update() {
+
+    // bool to see if overlap of floor layer and feet object
+    isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
+
+    // if is touching ground and jump button pressed, add jump force
+    if (Input.GetButtonDown("Jump") && isGrounded == true) {
+        jumping = true;
+        jumpCheckCounter = jumpCheck;
+        rb.velocity = Vector2.up * jumpForce;
+    }
+
+    if (Input.GetButton("Jump") && jumping == true) {
+        // can jump only once
+        if (jumpCheckCounter > 0) {
+            Debug.Log(jumpCheckCounter);
+            rb.velocity = Vector2.up * jumpForce;
+            jumpCheckCounter -= Time.deltaTime;
+        }
+
+    }
+    else {
+        // once jumping is not true, set jump to false
+        jumping = false;
+    }
+
+    if (Input.GetButtonUp("Jump")) {
+        jumping = false;
+    }
+
+    // flips player
+    if (moveInput > 0) {
+        transform.eulerAngles = new Vector3(0, 0, 0);
+    }
+    else if (moveInput < 0) {
+        transform.eulerAngles = new Vector3(0, 180, 0);
+    }
+}
+void FixedUpdate() {
+    // gets horizontal input from Unity (1 = right, -1 = left)
+    moveInput = Input.GetAxisRaw("Horizontal");
+    rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+}
+```
+
+Save and exit. Now, when you click on the player, movement script, there will be options for you to tinker with. Note, you will need to make a isGrounded empty object to be placed at the feet of the player to see if there is **ground layer **(must set ground layer to ground objects that can be jumped on) beneath the player to jump off of. Also note that this script has a jump that can be a multitude of heights depending on how long the jump button is held down for.
+
+Also, for the player to not stick to the walls while jumping, you must add a new physics material 2D. Change friction to 0 and bounciness to whatever you want it to be and apply to player in the collider
+
+from https://www.youtube.com/watch?v=j111eKN8sJw
 
 
 
 <a name="camera"></a>
 
 #### 	4d Camera
+
+**Background**
+
+A background 
 
 When implementing a camera, there are two options, however, we will through the harder option first to get use to how cameras work
 
@@ -283,6 +389,34 @@ Animation is critical in creating any game that does not look static. In Unity, 
 
 
 
+<a name="music"></a>
+
+#### 4k Music & Sounds
+
+
+
+
+
+<a name="par"></a>
+
+#### 4l Parallax
+
+
+
+<a name="odds"></a>
+
+#### 4m Odds and Ends
+
+For changing controls, go to Project Settings -> Input Manager and you can change your input from there
+
+**Linking Scenes**
+
+
+
+[🔝 Back to Top](#top)
+
+
+
 <a name="3D"></a>
 
 ### 5. 3D
@@ -295,7 +429,21 @@ Animation is critical in creating any game that does not look static. In Unity, 
 
 <a name="5b"></a>
 
-#### 	5b 
+#### 	5b 3D Models & Bodies
+
+
+
+<a name="5c"></a>
+
+#### 	5c 
+
+
+
+
+
+<a name="3music"></a>
+
+#### 5 Music & Sounds
 
 
 
