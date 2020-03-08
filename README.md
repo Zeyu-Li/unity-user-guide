@@ -130,7 +130,7 @@ From the header we also see:
 
 * Texture Type - Usually will only use sprite (2D image) or normal map (for 3D depth)
 * Sprite mode - as single texture or sprite sheet
-  * Adjust the pixels per unit (Pixels per unit should be 1-1) (In my case, it is 360 px per tile)
+  * Adjust the pixels per unit (Pixels per unit should be 1-1) (In my case, it is 358 px per tile)
   * Pivot - where the center of object is
 * Wrap Mode - how the image is displayed (ie repeated or clamped(/cut) at the board)  
 * Filter Mode - Point (equivalent to pixel perfect or nearest neighbour in Photoshop) or Bilinear (natural scaling with edge softening)
@@ -317,9 +317,15 @@ from https://www.youtube.com/watch?v=j111eKN8sJw
 
 #### 	4d Camera
 
+The camera will capture things on from the scene to project onto the play window. 
+
+The most important setting for a camera object is the size. Changing the size will change the view for the user. 
+
 **Background**
 
-A background 
+A background can be achieved by placed in the camera and setting the **Order in Layer** to some negative number, such that it is behind the foreground objects
+
+**Camera Follow**
 
 When implementing a camera, there are two options, however, we will through the harder option first to get use to how cameras work
 
