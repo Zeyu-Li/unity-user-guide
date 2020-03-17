@@ -402,7 +402,46 @@ To make a prefab, just drag the desired prefab object from scene to the prefabs 
 
 A particle system adds an extra layer of immersion that is quite simple in Unity. 
 
+To add a particle system;
 
+1. Right click hierarchy -> Effects -> Particle System
+2. Remember, default is some circled with soft edges
+3. To make custom particles,
+   1. Go to photo editor of chose (Adobe Photoshop, illustrator, or GIMP work great)
+   2. Make your single particle or collection of particles
+   3. Save
+4. To use the custom particles, goto renderer -> material -> sprite default
+5. Now enable **Texture Sheet Animation**
+6. Mode -> ~~Grid~~ -> sprites
+7. Select objects
+
+To customize particle system, 
+
+There are near infinite options in the inspector. Most options are self explanatory. Some of the common options changes are
+
+* Loop - for ambient particles that need to on screen all the time
+
+*  Start Color Options
+  * Random Color -> randomly selects a color
+  * Gradient -> flows from one color to the next
+  * Random between two colors/gradients -> randomly picks a color in gradient or one of the two colors
+* Prewarm - already has some particles and does not start with no particles
+* Start Speed - Speed of particles
+* Start Lifetime - how long the particle lives in the scene
+* Start Size - size of particle
+* Emission -> Rate over Time - how many particles spawn over time
+* Rotation over Lifetime -> rotates over time
+* Collision -> collides with solid objects
+* Trail -> creates trails of particle as it moves
+* Color over Lifetime -> you can fade the particles in and out
+* Shape -> Randomize Direction - changes starting velocity vector
+* Shape -> Spherize Direction - Moves out from center
+
+*Note for some options like start speed, lifetime, size, etc, you can pick from an interval
+
+Else, look in Unity docs. To test particles, use the Particle Effects window. This will control preview
+
+![partE](images/partE.png)
 
 <a name="coll"></a>
 
