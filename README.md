@@ -453,7 +453,112 @@ a. collection of the item
 
 b. the storage of the item in inventory
 
+We will start with a. the collection of an item
 
+1. Find a sprite or animation to use as collectable. For simplicity, I will use a sprite like this:
+
+   <img src="images/gem.png" alt="gem" style="zoom:33%;" />
+
+2. Drag gem into level
+
+3. Add collider (I think box collider works best here) and check **Is Trigger**
+
+4. Add a new tag and select it of the gem
+
+   ![tag](images/tag.png)
+
+5. Within the player movement, we need to detect the collision overlaps and if an element of the tag overlaps the player, destroy object
+
+   The is done by putting the following code somewhere in the player movement class (not in an update or start method)
+
+   ```c#
+   private void OnTriggerEnter2D(Collider2D collision) {
+       if (collision.gameObject.CompareTag("gems")) {
+           Destroy(collision.gameObject);
+       }
+   }
+   ```
+
+6. (Optional) If you want to reuse the gem, drag in Prefab folder
+
+Now we must consider the storage of the item in inventory. Note this can be as easy as a counter or a full fledged inventory
+
+I will do a counter for simplicity
+
+1. While we are adding a counter, it is also a convenient time to add a sound of collecting the item. 
+
+2. Resources for audio clip: [here](https://docs.unity3d.com/ScriptReference/AudioSource.Play.html) & [here](https://docs.unity3d.com/ScriptReference/AudioSource-clip.html) but I used [PlayOneShot](https://docs.unity3d.com/ScriptReference/AudioSource.PlayOneShot.html) 
+
+3. Optionally, a collecting animation or particles could also be implemented
+
+4. However, we will jump directly to a collectables counter
+
+   1. Create a text layer by clicking UI -> Text - TextMeshPro
+
+   2. Click on canvas -> Render Mode -> Screen Space - Camera
+
+   3. Assign Render Camera to current Main camera
+
+   4. Change layering order on canvas so it is in front
+
+   5. Position it right. You may also chose to have a image accompanying the counter
+
+   6. Create a collectablesManager script with the following:
+
+      ```c#
+      using System.Collections;
+      using System.Collections.Generic;
+      using UnityEngine;
+      using TMPro;
+      
+      public class collectablesManager : MonoBehaviour
+      {
+          public static collectablesManager instance;
+          public TextMeshProUGUI text;
+          public int score = 0;
+          // Start is called before the first frame update
+          void Start()
+          {
+              if (instance==null) {
+                  instance = this;
+              }
+          }
+      
+          // Update is called once per frame
+          public void changeScore(int gemValue) {
+              score += gemValue;
+              text.text = "x" + score.ToString();
+          }
+      }
+      ```
+
+   7. Create empty to house the collectablesManager script and drag the script in
+
+   8. Drag the text score into the Text field
+
+   9. Now gems script and populate with the following: 
+
+      ```c#
+      using System.Collections;
+      using System.Collections.Generic;
+      using UnityEngine;
+      
+      public class gems : MonoBehaviour
+      {
+          // Start is called before the first frame update
+          public int value = 1;
+          private void OnTriggerEnter2D(Collider2D collision) {
+              if (collision.gameObject.CompareTag("Player")) {
+                  collectablesManager.instance.changeScore(value);
+              }
+          }
+      }
+      ```
+
+      *Note by using this, you must have one collider with the player tag or the collectable might count twice. Optionally, you can make a new empty game object with the player tag than triggers the collection
+
+
+Resource: https://www.youtube.com/watch?v=DZ-3g31jk90
 
 <a name="anim"></a>
 
