@@ -564,15 +564,95 @@ Resource: https://www.youtube.com/watch?v=DZ-3g31jk90
 
 #### 4h Animation
 
-Animation is critical in creating any game that does not look static. In Unity, animation is handled by 
+Animation is critical in creating any game that does not look static. In Unity, animation is handled by Animator and Animation windows. The **Animator** is a node based system while the **Animations** is a timeline based.
+
+1. To make an animation, simply drag more than 1 picture into the scene
+
+2. Save your animations in the animations folder
+
+You have made your first animation
+
+To adjust your animation, go to the animator window and clip on the orange node.
+
+You can change the speed here
+
+To add different actions connected to the original animation; 
+
+1. Go to the Animations window when the original animation is selected
+
+2. Click on animation dropdown -> Create New Clip...
+
+   ![animation](images/animation.png)
+
+3. Save the new animation
+
+4. It is recommended that you change the sample frame to the original animation's sample frame
+
+5. Drag all the new set of pictures to the timeline in the **Animations** window
+
+6. To change the pictures per second, drag the blue bar (all frames must be selected ie in blue)
+
+7. Now to move from any one animation (or state as it is called), go to the **Animator** window
+
+8. Right click on the **Any State** node -> Make Transition
+
+   ![states](images/states.png)
+
+9. We will link the idle animation to the other transitions, therefore, after selecting make transition, click on idle and this will connect any state to idle
+
+10. Also make transition to walk (or any other animation) from any state
+
+11. To link these states up, go to **Parameters** tab in the Animator window and click **+** -> int
+
+12. Name it
+
+13. Select transition Any State to idle
+
+14. in the inspector, expand Settings and
+
+    1. Uncheck **Fixed Duration** if you want no transition duration
+    2. **Change Transition** Duration to 0
+    3. Uncheck can transition to self
+    4. In Conditions, click **+**
+    5. Set it equal to 0
+    6. Do the same thing for **Any State** to any other animation to the same parameter except change step 5 to equal to some other number
+
+15. Now to connect the animations with the code so it changes with the actions performed by the player
+
+16. Go to the player movement script
+
+17. Add the following:
+
+    ```c#
+    private Animator animator; //attribute in class
+    
+    // add the following in Start
+    void Start() {
+        animator = GetComponent<Animator>();
+    }
+    
+    // add the following in FixedUpdate
+    void FixedUpdate() {
+        // if moving, then idle, else set to moving animation
+        if (moveInput != 0) {
+            animator.SetInteger("AnimValue", 1);
+        } else {
+            animator.SetInteger("AnimValue", 0);
+        }
+    }
+    ```
 
 
+
+\* Note if you don't want the animation to loop, go to the animation in where you saved your animation and uncheck **Loop Time**
 
 <a name="events"></a>
 
 #### 4i Events
 
+Events are add much needed interactions into a game, but keep in mind that every event requires a lot of work. With this in mind, Let's implement a button that triggers a platform. \* Note tis is very similar to a buttoned door
 
+1. 
 
 
 
@@ -580,7 +660,7 @@ Animation is critical in creating any game that does not look static. In Unity, 
 
 #### 4j Pixelated
 
-
+Perhaps you want your game to have a pixelized feel, thankfully, it is not too much work to do that with Unity. 
 
 
 
