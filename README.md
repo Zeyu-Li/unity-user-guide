@@ -756,13 +756,52 @@ You may also change the pixels per unit to your desired size.
 
 Music is curial to a game's level of emersion. While I will not go into music theory and music in general, I will help you get familiar with how Unity handles sounds. This is something Unity does really well, so not much can be said in the chapter. 
 
-If you need music to practice with, use 
+If you need music to practice with, use main.wav in the **test_music** directory. Also note that this music is made by me and I give you permission to use it under creative commons license 
 
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
 
+This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+First, when dealing with sound, not much should be changed and when playing a sound, in the script that triggers the sound, just put the following in
+
+```c#
+// audio    
+public AudioSource audioSource;
+public AudioClip clip;
+public float volume = 0.2f; // volume
+
+// to play sound
+audioSource.PlayOneShot(clip, volume);
+```
+
+The 3 options are
+
+1. AudioSource - where the sound is omitted from
+2. AudioClip - the audio file
+3. volume - the volume of the clip
+
+For music, it is recommended that a **Audio Source** object is created and a script added to control the music and when to stop it
+
+Otherwise, if starting and stopping the music is not a concern, just drag the music clip into the Audio Clip box and you are done
+
+![music](images/music.png)
+
+![music2](images/music2.png)
+
+Below are some more options. Some important ones are the 
+
+1. Play on Awake - plays when scene is loaded 
+2. loop - loops track
+3. Volume - volume of track
+4. Pitch - shifts pitch (not recommended)
 
 <a name="par"></a>
 
 #### 4l Parallax
+
+Parallax is a popular way of displaying movement, especially if the game is a bit static.
+
+What parallax does is like a old film reel, but instead of new frames, it is a repeat of the old frame(s).
 
 
 
@@ -774,7 +813,19 @@ For changing controls, go to Project Settings -> Input Manager and you can chang
 
 **Linking Scenes**
 
+
+
 **Death Zones**
+
+
+
+**Enemies**
+
+
+
+**Pausing**
+
+
 
 [🔝 Back to Top](#top)
 
