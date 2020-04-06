@@ -803,7 +803,58 @@ Parallax is a popular way of displaying movement, especially if the game is a bi
 
 What parallax does is like a old film reel, but instead of new frames, it is a repeat of the old frame(s).
 
+1. Within the main camera, drag in your parallax object (I will be using clouds) 
 
+2. Clone/ copy and paste another version of the parallax object and set it just right and left of the original object if you want it to go right to left. Note the theses should be a child of the original object
+
+3. Create new parallax script and put this in it:
+
+   ```c#
+   using System.Collections;
+   using System.Collections.Generic;
+   using UnityEngine;
+   
+   public class parallax : MonoBehaviour
+   {
+       private float length;
+       private float startpos;
+   
+       public GameObject cam;
+       public float parallex;
+   
+       // Start is called before the first frame update
+       void Start()
+       {
+           // if you want to do it by the y, just change x to y
+           startpos = transform.position.x;
+   
+           length = GetComponent<SpriteRenderer>().bounds.size.x;
+       }
+   
+       // Update is called once per frame
+       void Update()
+       {
+           float dis = cam.transform.position.x * parallex;
+           float tmp = cam.transform.position.x * (1-parallex);
+   
+           transform.position = new Vector3(startpos + dis, transform.position.y, transform.position.z);
+   
+           if (tmp > startpos+length) {
+               startpos += length;
+           } else if (tmp < startpos - length) {
+               startpos -= length;
+           }
+       }
+   }
+   ```
+
+4.  Drag the script on the oringal parallax object
+
+5. Drag the main camera in the camera slot and play with the parallax number (between 1 to 0) to see how much parallax you want
+
+
+
+Resource: https://www.youtube.com/watch?v=zit45k6CUMk
 
 <a name="odds"></a>
 
