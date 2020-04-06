@@ -652,7 +652,77 @@ To add different actions connected to the original animation;
 
 Events are add much needed interactions into a game, but keep in mind that every event requires a lot of work. With this in mind, Let's implement a button that triggers a platform. \* Note tis is very similar to a buttoned door
 
-1. 
+1. Have a button and platform object ready. If not, feel free to use the ones below
+
+   
+
+   <img src="images/button.png" alt="button" style="zoom:50%;" /><img src="images/pressedButton.png" alt="pressedButton" style="zoom:50%;" /><img src="images/platform.png" alt="platform" style="zoom:70%;" />
+
+   
+
+2. If you want, drag the two buttons as an animation so you can change the sprites when touched, but I will not go through the animations
+
+3. Add a button tag onto the button
+
+4. Create a button script and paste the following into the script
+
+   ```c#
+   using System.Collections;
+   using System.Collections.Generic;
+   using UnityEngine;
+   
+   public class button : MonoBehaviour
+   {
+       // renderer and timer
+       public GameObject somePlatform;
+   
+       // change button state
+       private Animator animator;
+   
+       // audio    
+       public AudioSource audioSource;
+       public AudioClip clip;
+       public float volume = 0.2f;
+   
+       // timer for how long the platform stays
+       private bool timerOn = false;
+       public float timeLeft = 8.0f;
+   
+       private void Start() {
+           animator = GetComponent<Animator>();
+       }
+   
+       private void FixedUpdate() {
+           // when pressed, wait for timer to go down, then revert
+           if (timerOn) {
+               timeLeft -= Time.deltaTime;
+               if (timeLeft < 0) {
+                   animator.SetInteger("button", 0);
+                   somePlatform.SetActive(false);
+                   timerOn = false;
+                   timeLeft = 8.0f;
+               }
+           }
+       }
+   
+       // Start is called before the first frame update
+       private void OnTriggerEnter2D(Collider2D collision) {
+           // when collision with obj with player tag, set button to pressed down,
+           // play tone, set platform active and activate timer to turn the things back to normal
+           if (collision.gameObject.CompareTag("Player")) {
+               animator.SetInteger("button", 1);
+               audioSource.PlayOneShot(clip, volume);
+               somePlatform.SetActive(true);
+               timerOn = true;
+               timeLeft = 8.0f;
+           }
+       }
+   }
+   ```
+
+5. Click on script, drag audio stuff or remove all audio parts from script and set the object to **Some Platform**, also set the timer for when it reverts back to normal (auto is 8 seconds)
+
+As you can see, using what we already know, we can get a lot of events to work! I know this may be challenging and you may run into bugs (hell, even I ran in many bugs), but persistent and challenge yourself and good luck!
 
 
 
@@ -662,13 +732,31 @@ Events are add much needed interactions into a game, but keep in mind that every
 
 Perhaps you want your game to have a pixelized feel, thankfully, it is not too much work to do that with Unity. 
 
+General rules and tips
 
+Some extensions (especially with cameras) have options to enable **pixel perfect**. Whenever presented with that option, select it.
+
+Otherwise when importing your pixel artwork or spritesheet; 
+
+\* If you need pixel art to practice this section, take this:
+
+<img src="images/heartPerson.png" alt="heartPerson" style="zoom:100%;" />
+
+Click on Filter Mode -> Point (no filter)
+
+![pixel](images/pixel.png)
+
+The point mode is like a nearest neighbour in Photoshop. This way, if you scale it, you will get the pixels to snap sharply. 
+
+You may also change the pixels per unit to your desired size. 
 
 <a name="music"></a>
 
 #### 4k Music & Sounds
 
+Music is curial to a game's level of emersion. While I will not go into music theory and music in general, I will help you get familiar with how Unity handles sounds. This is something Unity does really well, so not much can be said in the chapter. 
 
+If you need music to practice with, use 
 
 
 
@@ -686,7 +774,7 @@ For changing controls, go to Project Settings -> Input Manager and you can chang
 
 **Linking Scenes**
 
-
+**Death Zones**
 
 [🔝 Back to Top](#top)
 
