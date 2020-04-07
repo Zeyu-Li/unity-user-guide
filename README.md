@@ -864,11 +864,61 @@ For changing controls, go to Project Settings -> Input Manager and you can chang
 
 **Linking Scenes**
 
+Linking scenes is quite easy and just requires knowlegde of the following
+
+1. When moving to another scene (this will usually involve a detection collider), simply put
+
+```c#
+using UnityEngine.SceneManagement;
+
+// and this to load a new or the same scene
+
+SceneManager.LoadScene('#scene name here');
+
+```
+
 
 
 **Death Zones**
 
+For this exercise, I will create a death zone if the player is out of bounds, however, this could easily be modified such that they are spikes. 
 
+1. Create an empty object to house the colliders for out of bounds
+
+2. Make the colliders are a series of sprites or a tile map. As long as a collider can be set to it such that Unity can detect when the Player's colliders collide with the out of bounds colliders, it is fine
+
+3. Create a new tag. I will call it **death**
+
+4. Create script **death** and paste in the following
+
+   ```c#
+   using System.Collections;
+   using System.Collections.Generic;
+   using UnityEngine;
+   using UnityEngine.SceneManagement;
+   
+   public class death : MonoBehaviour
+   {
+       // collides with object tagged death
+       private void OnTriggerEnter2D(Collider2D collision) {
+           if (collision.gameObject.tag == "death") {
+               Die();
+           }
+       }
+   
+       // kills player and resets
+       void Die() {
+           Destroy(transform.parent.gameObject);
+           SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+       }
+   }
+   ```
+
+   \* Optionally, you can just add this to the movement player script
+
+5. Drag to player collider
+
+   
 
 **Enemies**
 
