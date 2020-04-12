@@ -30,6 +30,7 @@ I will start at the beginning and work my way through the variations avenues you
    * [Music & Sounds](#music)
    * [Parallax](#par)
    * [Odds and Ends](#odds)
+   * [End Note](#end2d)
 5. [3D](#3D)
    * [General](#5a)
    * [3D Models & Bodies](#5b)
@@ -90,7 +91,7 @@ Unity is a panel based application. These panels can be rearranged however you l
 
 This is my default setup. The **Scene** panel is the most important viewport. This is where you modify the scene. The **Game** scene only turns on if you hit play. It is a preview of what the user will see if you build the current scene.
 
-On the right hand side, we have the **Project** directory (folder) panel on the bottom. This is where all your assets are (ie art, music, scripts, etc.). The **Hierarchy** is like a layers panel in Photoshop. It is an arrangement of all elements in the scene. For every element of the scene can be hidden from the view by hitting eye button when hovering on the element. The lock button is the pointer icon. The **Inspector** contains all modifiable aspect of an element along with info. This is where you drag scripts in the element.
+On the right hand side, we have the **Project** directory (folder) panel on the bottom. This is where all your assets are (ie art, music, scripts). The **Hierarchy** is like a layers panel in Photoshop. It is an arrangement of all elements in the scene. For every element of the scene can be hidden from the view by hitting eye button when hovering on the element. The lock button is the pointer icon. The **Inspector** contains all modifiable aspect of an element along with info. This is where you drag scripts in the element.
 
 Other panels include a console, which will output when the game is run. The **Animator** and **Animation** go hand in hand and creates animation for sprites. 
 
@@ -848,7 +849,7 @@ What parallax does is like a old film reel, but instead of new frames, it is a r
    }
    ```
 
-4.  Drag the script on the oringal parallax object
+4.  Drag the script on the original parallax object
 
 5. Drag the main camera in the camera slot and play with the parallax number (between 1 to 0) to see how much parallax you want
 
@@ -864,7 +865,7 @@ For changing controls, go to Project Settings -> Input Manager and you can chang
 
 **Linking Scenes**
 
-Linking scenes is quite easy and just requires knowlegde of the following
+Linking scenes is quite easy and just requires knowledge of the following
 
 1. When moving to another scene (this will usually involve a detection collider), simply put
 
@@ -922,9 +923,139 @@ For this exercise, I will create a death zone if the player is out of bounds, ho
 
 **Enemies**
 
+Enemies are an important yet complicated thing. They can be static, or mobile. Have easy or tough AI, or creates projectiles. For this example I will do medium-easy example of a creature in a box moving back and forth
+
+1. Drag Sprite or Animation in the scene
+
+2. New creatureMove script and paste in the following
+
+   ```c#
+   using System.Collections;
+   using System.Collections.Generic;
+   using UnityEngine;
+   
+   public class creatureMove : MonoBehaviour
+   {
+       // speed of creature
+       public float speed = 5f;
+       public bool smartTurn = true;
+   
+       // wall detection
+       public Transform start, end;
+   
+       public bool collision;
+   
+       private Rigidbody2D body;
+   
+       // Start is called before the first frame update
+       void Start()
+       {
+           body = GetComponent <Rigidbody2D>();
+       }
+   
+       // Update is called once per frame
+       void Update()
+       {
+           collision = Physics2D.Linecast(start.position, end.position, 1 << LayerMask.NameToLayer("Ground"));
+   
+           if (collision == smartTurn) {
+               transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
+           }
+   
+           body.velocity = new Vector2(transform.localScale.x, 0) * speed;
+   
+       }
+   }
+   ```
+
+3. Drag script to creature
+
+4. Create an empty object as a child of the creature
+
+5. To see the empty object that will act as a wall detector, press the cube icon and click on a large tag
+
+   ![detector](images/detector.png)
+
+6. Place empty object in front of the creature such that if that empty interacts a wall, the creature will turn
+
+7. Drag the creature itself into the creature box and the empty in the wall box
+
+8. Change speed to desired amount and check **Smart Turn** to make the creature turn instead of falling off an ledge
+
+9. If you want the creature to not walk off the edge, also cone the empty object and put it bellow the feet of the player so it is always touching the ground. Once it is not touching the ground, it should turn around
+
 
 
 **Pausing**
+
+Pausing with Unity can be made simple with one command. 
+
+1. Create script pause and drag it on your player (optionally, you can just do this in the movement folder, but this will be more organized)
+
+2. Create a pause UI element (I will be doing a simple Pause text)
+
+3. Paste in the following:
+
+   ```c#
+   using System.Collections;
+   using System.Collections.Generic;
+   using UnityEngine;
+   
+   public class pause : MonoBehaviour
+   {
+       public static bool paused = false;
+   
+       public GameObject pauseMenu;
+   
+       // Update is called once per frame
+       void Update()
+       {
+           if (Input.GetKeyDown(KeyCode.P)) {
+               Pause();
+           }
+       }
+   
+       void Pause() {
+           if (!paused) {
+               pauseMenu.SetActive(true);
+               Time.timeScale = 0f;
+           } else {
+               pauseMenu.SetActive(false);
+               Time.timeScale = 1f;
+           }
+           paused = !paused;
+       }
+   }
+   ```
+
+4. Place the UI element in the Pause menu box
+
+
+
+Resource: https://www.youtube.com/watch?v=JivuXdrIHK0
+
+**Quit**
+
+To quit game simply add the following onto the player:
+
+```c#
+if (Input.GetKey("escape")) // change escape to any other character if you like 
+{
+    Application.Quit();
+}
+```
+
+in the update method
+
+\* Note, of course more logic could be added to make this more complicated
+
+
+
+<a name="#end2d"></a>
+
+#### 4n End Note
+
+I hope you had a good taste of Unity 2D. Of course, this was just a very brief introduction and there are many more aspects of Unity not covered; ie UI buttons. You can go to my Unity 3D course below if you want to learn more, or start creating your 2D game. There are many more resources online for you to check out if you need help, or want inspiration. These resource can be found in [section 11](#Help) and thank you for joining me with this course. If you have any feedback, feel free to go to the [GitHub](https://github.com/Zeyu-Li/Unity-Template-2D-2019_3/issues) and open a new issue. Again, thanks for viewing and good luck to your future Unity endeavors. 
 
 
 
@@ -1042,6 +1173,10 @@ So you are finished your game. You need to disturbed the game. This is done thro
 5. **Build** (**And Run** if you want to run it)
 
 6. Select the folder and wait for it to build
+
+
+
+\* Note if you did not add an exit game button, the only way to exit is to close the program externally or Alt-f4
 
 
 
