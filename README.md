@@ -1061,8 +1061,6 @@ I hope you had a good taste of Unity 2D. Of course, this was just a very brief i
 
 [🔝 Back to Top](#top)
 
-
-
 <a name="3D"></a>
 
 ### 5. 3D
@@ -1075,9 +1073,9 @@ I hope you had a good taste of Unity 2D. Of course, this was just a very brief i
 
 To start a 3D project, press **New** and select 3D on the pop-up screen and use the desired directory (or follow my cloning [guide](#guide) so to not start from starch). This may take some time, but after Unity finishes installing itself, we can get started. Now let's make a 3D game!
 
-
-
 \* Note this tutorial (3D) follows this [repo](https://github.com/Zeyu-Li/Unity-Template-3D-2019_3):
+
+When you start off, you will be brought up to a scene consisting of a directional light (which is like a ray/sun light) and a Camera
 
 
 
@@ -1085,15 +1083,48 @@ To start a 3D project, press **New** and select 3D on the pop-up screen and use 
 
 #### 	5b 3D Models & Bodies
 
-If you have experience with 3D software like Cinema 4D, Blender, or the Autodesk suit, Unity 3D will be very familiar to you. If you have not worked in a 3D environment, there is some adjusting
+If you have experience with 3D software like Cinema 4D, Blender, or the Autodesk suit, Unity 3D will be very familiar to you. If you have not worked in a 3D environment, there is some adjusting. Note I will **not** go through the tools (ie rotate, scale, transform) for manipulating 3D bodies because they are the universal shortcuts and effects. 
+
+First off note that you do not need to make all 3D asset body. There are many asset stores with free and paid models. Usually I will use tons of free assets from the asset package (or go to [asset store](https://assetstore.unity.com/3d)) and if I need something custom, I model it with Blender. I recommend learning a 3D software before going into Unity 3D because it can be translated almost directly to Unity with light sources, objects, texture maps, etc. (my recommendation is [Blender Guru](https://www.youtube.com/user/AndrewPPrice)). 
+
+To import 3D models/bodies, you will have to import it as a fbx file (make sure you export only the things you have selected (the model) and not everything including the camera, lights, etc.) 
+
+From there I have a model that can be dragged into the scene. Now you have the model with the materials and other properties included.
+
+![material](images\material.png)
+
+Of course, you can move it, rotate it, or scale it, but I will assume you know what to do that. However, if you want Unity to automatically general colliders for the model (generally good enough), 
+
+1. click on the model and under **Meshes** select **Generate Colliders**
+
+![generate](images\generate.png)
+
+2. Then click apply. 
+
+3. Now Unity is generating colliders and this may take a while
 
 
+
+If you want a object to be solid and non-movable (this will use bake lighting, which I will go in more detail later), check **Static**
+
+**Clean Snapping**
+
+In many 3D programs, you will get options to snap to another object or vertex. This can be done in Unity. To achieve this,
+
+1. 
+
+
+
+Resource: This can be done if you follow [this](https://youtu.be/NjflKgMepQs)
 
 <a name="5c"></a>
 
-#### 	5c 
+#### 	5c Movement
 
+For movement, generally, Unity's Standard Package can be used so no bones, animations, or controls need to be wired. I recommend importing Unity's character package. This is done by,
 
+1. installing the Unity Standard Package in the **Asset Store**
+2. 
 
 
 
@@ -1102,6 +1133,8 @@ If you have experience with 3D software like Cinema 4D, Blender, or the Autodesk
 #### 5 Music & Sounds
 
 
+
+[🔝 Back to Top](#top)
 
 <a name="title"></a>
 
