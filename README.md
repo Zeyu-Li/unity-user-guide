@@ -1051,7 +1051,7 @@ in the update method
 
 
 
-<a name="#end2d"></a>
+<a name="end2d"></a>
 
 #### 4n End Note
 
@@ -1071,11 +1071,21 @@ I hope you had a good taste of Unity 2D. Of course, this was just a very brief i
 
 #### 	5a General
 
-3D, it's where we live. Good for you for deciding to go 3D. Before we go any further, it is not recommended that you start off with a 3D project if you just started game design. 
+3D, it's where we live. Good for you for deciding to go 3D. Before we go any further, it is not recommended that you start off with a 3D project if you just started game design. Furthermore, it is recommended that you start with the previous 2D tutorial because some of the concepts and components will be similar or exact. 
+
+To start a 3D project, press **New** and select 3D on the pop-up screen and use the desired directory (or follow my cloning [guide](#guide) so to not start from starch). This may take some time, but after Unity finishes installing itself, we can get started. Now let's make a 3D game!
+
+
+
+\* Note this tutorial (3D) follows this [repo](https://github.com/Zeyu-Li/Unity-Template-3D-2019_3):
+
+
 
 <a name="5b"></a>
 
 #### 	5b 3D Models & Bodies
+
+If you have experience with 3D software like Cinema 4D, Blender, or the Autodesk suit, Unity 3D will be very familiar to you. If you have not worked in a 3D environment, there is some adjusting
 
 
 
@@ -1186,7 +1196,7 @@ So you are finished your game. You need to disturbed the game. This is done thro
 
 From my [GitHub](https://github.com/Zeyu-Li?tab=repositories):
 
-1. Find the right Unity Repo to clone from my account (ie [Unity-Template-2D-2019_3](https://github.com/Zeyu-Li/Unity-Template-2D-2019_3), [Unity-Template-3D-2019](https://github.com/Zeyu-Li/Unity-Template-2D-2019_3)) 
+1. Find the right Unity Repo to clone from my account (ie [Unity-Template-2D-2019_3](https://github.com/Zeyu-Li/Unity-Template-2D-2019_3), [Unity-Template-3D-2019](https://github.com/Zeyu-Li/Unity-Template-3D-2019_3)) 
 
 2. Download ZIP after clicking Clone or download
 
