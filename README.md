@@ -34,8 +34,10 @@ I will start at the beginning and work my way through the variations avenues you
 5. [3D](#3D)
    * [General](#5a)
    * [3D Models & Bodies](#5b)
+     * Resources
    * [Movement](#5c)
    * [Camera](#5d)
+   * [Lighting](#lighting)
    * [Prefabs](#5e)
    * [Particle Systems](#5f)
    * [Events](#5g)
@@ -1083,6 +1085,49 @@ When you start off, you will be brought up to a scene consisting of a directiona
 
 #### 	5b 3D Models & Bodies
 
+**Resources**
+
+Before we get to 3D bodies in Unity, it is necessary to get 3D models. Unity is not build to be a 3D modeling software, so 3D objects should be created in 3D programs or imported from 3D libraries. Therefore, I will recommend some free software and libraries
+
+**Software**
+
+Free
+
+* [Blender](https://www.blender.org/) - a very powerful open source 3D modeling, texturing, animations, and general 3D software. All my models in the exercises where made in Blender. A good place to start is with [Andrew's Donut](https://www.youtube.com/watch?v=TPrnSACiTJ4&list=PLxLGgWrla12dEW5mjO09kR2_TzPqDTXdw). New 2.8 version is very similar to all other 3D software. I **very strongly** advice you use Blender because it is free and is often much better than paid software
+* [TreeIt](https://www.evolved-software.com/treeit/treeit) - a tree generator with presets that range from cactus to palm trees
+
+
+
+Paid
+
+* [Cinema 4D](https://www.maxon.net/en-us/products/cinema-4d/overview/) - 59.99USD/month (overpriced and not as good as Blender)
+* [Autodesk Maya](https://www.autodesk.com/products/maya/overview) - 1 620 USD/year (supposedly the industry standard) \* Note I don't know if they have a 3 year free for students like other Autodesk CAD software
+* [Houdini](https://www.sidefx.com/products/houdini/) - 199 USD / year
+* [Substance Designer](https://www.substance3d.com/products/substance-designer) - $19.90/month (for **revenue** under \$100k) a node based texture designer. \* Note this might actually be useful, but from my experience, it is not easy to learn and textures can be found online or created with other programs like Adobe Illustrator and converted into normal maps in Blender.
+
+
+
+\* Note don't use CAD software like Fusion 360, Revit, Solidworks etc, because those are for CAD (computer assisted design) and are aimed towards engineers. Also, Blender has Architectural Plugin with many of the functionality of Autodesk Revit. 
+
+
+
+**Libraries**
+
+* [Unity Asset Store](https://assetstore.unity.com/3d) - free and paid assets
+* [Free 3D](https://free3d.com/3d-models/unity) - be careful, some items are not for commercial applications
+
+
+
+Textures
+
+* [3D Textures](https://3dtextures.me/)
+* [TTextureHaven](https://texturehaven.com/)
+* [CC0 Textures](https://cc0textures.com/)
+
+
+
+**Unity**
+
 If you have experience with 3D software like Cinema 4D, Blender, or the Autodesk suit, Unity 3D will be very familiar to you. If you have not worked in a 3D environment, there is some adjusting. Note I will **not** go through the tools (ie rotate, scale, transform) for manipulating 3D bodies because they are the universal shortcuts and effects. 
 
 First off note that you do not need to make all 3D asset body. There are many asset stores with free and paid models. Usually I will use tons of free assets from the asset package (or go to [asset store](https://assetstore.unity.com/3d)) and if I need something custom, I model it with Blender. I recommend learning a 3D software before going into Unity 3D because it can be translated almost directly to Unity with light sources, objects, texture maps, etc. (my recommendation is [Blender Guru](https://www.youtube.com/user/AndrewPPrice)). 
@@ -1111,7 +1156,17 @@ If you want a object to be solid and non-movable (this will use bake lighting, w
 
 In many 3D programs, you will get options to snap to another object or vertex. This can be done in Unity. To achieve this,
 
-1. 
+1. Select **Shaded Wireframe** as the view
+
+   ![view](images\view.png)
+
+2. Click on the **Move Tool** (the one with the arrows in 4 directions), hold down the **v key** and it will snap to a vertex 
+
+3. With the v-key still help, drag and it will snap to another vertex 
+
+\* note if you want to organize the 'layers', use **Quads** as they are 3D equivalents of empties
+
+\* also, if you enable static, 
 
 
 
@@ -1121,10 +1176,19 @@ Resource: This can be done if you follow [this](https://youtu.be/NjflKgMepQs)
 
 #### 	5c Movement
 
-For movement, generally, Unity's Standard Package can be used so no bones, animations, or controls need to be wired. I recommend importing Unity's character package. This is done by,
+**Legacy *note working past version 2019**
 
-1. installing the Unity Standard Package in the **Asset Store**
-2. 
+~~For movement, generally, Unity's Standard Package can be used so no bones, animations, or controls need to be wired. I recommend importing Unity's character package. This is done by,~~
+
+1. ~~installing the [Unity Standard Assets Package](https://assetstore.unity.com/packages/essentials/asset-packs/standard-assets-for-unity-2017-3-32351) in the **Asset Store**~~
+2. ~~In a new player folder, go to Assets -> Import Package -> Characters and click **Import** (this may or may not work and thus, you may need to import all of the standard package and purge unused)~~
+3. ~~In the imported Standard Assets, go to Characters -> FirstPersonCharacter->Prefabs->FPSController and drag it into the scene~~
+
+New way:
+
+Now that no Standard Packages exist, the easiest way to make a player is to create it from scratch
+
+1. 
 
 
 
