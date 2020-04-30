@@ -1188,9 +1188,134 @@ New way:
 
 Now that no Standard Packages exist, the easiest way to make a player is to create it from scratch
 
-1. 
+1. New empty object named player
+
+2. add a **character controller** as a component to the empty
+
+   1. You can change the slope limit (limit angle at which you traverse a slope)
+   2. Skin width
+   3. Center at which the character is based on 
+   4. Radius and Height of the capsule containing the player
+
+3. Add a camera to the empty, otherwise, move the empty exactly to the existing camera and move it such that it does not overlap meshes
+
+4. At this point, you can add the mesh that is your player and have it hold up to some animations or preloaded with animations, but for this tutorial, I will use a yellow capsule
+
+5. Next we want to control the camera with the mouse so create a cameraControl script in the scripts folder
+
+6. Paste the following in
+
+   ```c#
+   using System.Collections;
+   using System.Collections.Generic;
+   using UnityEngine;
+   
+   public class cameraControl : MonoBehaviour
+   {
+       // sensitivety of mouse
+       public float mouseSpeed = 100f;
+   
+       // place camera here
+       public Transform player;
+   
+       float xRotation = 0f;
+   
+       // Start is called before the first frame update
+       void Start() {
+           Cursor.lockState = CursorLockMode.Locked;
+       }
+   
+       // Update is called once per frame
+       void Update()
+       {
+           float mouseX = Input.GetAxis("Mouse X") * mouseSpeed * Time.deltaTime;
+           float mouseY = Input.GetAxis("Mouse Y") * mouseSpeed * Time.deltaTime;
+   
+           // for every frame, move camera up or down
+           xRotation -= mouseY;
+           // clamp the up down rotation
+           xRotation = Mathf.Clamp(xRotation, -85f, 85f);
+   
+           transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+           player.Rotate(Vector3.up * mouseX);
+       }
+   }
+   ```
+
+7. Optionally, you can smooth out the camera using the Lerp method
+
+8. Drag the player empty object into the Transform
+
+9. Next is movement
+
+10. Add a new player movement script to the empty player object
+
+11. Paste the following
+
+    ```c#
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+    
+    public class movement : MonoBehaviour
+    {
+        public CharacterController controller;
+    
+        public float movementSpeed = 14f;
+    
+        // gravity
+        public float gravity = -10f;
+        Vector3 velocity;
+    
+        // ground check
+        public Transform groundCheck;
+        public float checkRadius = 0.1f;
+        public LayerMask ground;
+    
+        public bool isGrounded = false;
+    
+        // jump
+        public float jump = 1f;
+    
+        // Update is called once per frame
+        void Update()
+        {
+            // is grounded calculations
+            isGrounded = Physics.CheckSphere(groundCheck.position, checkRadius, ground);
+    
+            if (isGrounded) {
+                velocity.y = -2f;
+            }
+    
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+    
+            Vector3 move = transform.right * x + transform.forward * z;
+    
+            controller.Move(move*movementSpeed*Time.deltaTime);
+    
+            // jump
+            if (Input.GetButtonDown("Jump") && isGrounded) {
+                velocity.y = Mathf.Sqrt(jump * -2f * gravity);
+            }
+    
+            velocity.y += gravity*Time.deltaTime;
+    
+            controller.Move(velocity * Time.deltaTime);
+    
+        }
+    }
+    ```
+
+    This accounts for gravity and movement. \* Note you can change the speed of movement, gravity constant, jump check radius, under the script
+
+12. For the gravity to work properly, a ground check must be preformed to reset the velocity. To do this, create empty object in player and place at the feet of the player
+
+13. Add new layer of ground to preform jumps and gravity checks on and apply it to the models
 
 
+
+Resource: [Brackeys](https://www.youtube.com/watch?v=_QajrabyTJc)
 
 <a name="3music"></a>
 
