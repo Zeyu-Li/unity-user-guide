@@ -37,10 +37,10 @@ I will start at the beginning and work my way through the variations avenues you
      * Resources
    * [Movement](#5c)
    * [Camera](#5d)
-   * [Lighting](#lighting)
-   * [Prefabs](#5e)
-   * [Particle Systems](#5f)
-   * [Events](#5g)
+   * [Lighting](#light)
+   * [Prefabs](#5f)
+   * [Particle Systems](#5g)
+   * [Events](#5h)
    * [Collectibles](#3coll)
    * [Music & Sounds](#3music)
    * [Odds and Ends](#3odds)
@@ -1144,13 +1144,15 @@ Of course, you can move it, rotate it, or scale it, but I will assume you know w
 
 ![generate](images\generate.png)
 
+\* Note for some things like platforms, **Generate Colliders** can be bad as the optimized mesh collides with the player, therefore switch to box colliders
+
 2. Then click apply. 
 
 3. Now Unity is generating colliders and this may take a while
 
 
 
-If you want a object to be solid and non-movable (this will use bake lighting, which I will go in more detail later), check **Static**
+If you want a object to be solid and non-movable (this will use bake lighting, which I will go in more detail later), check **Static**. Remember, this will generate a bake map, which is cpu intensive and may take a lot of time depending on the size of the model. Unfortunately, if the object is really big, checking Static may actually slow things down, so keep that in mind
 
 **Clean Snapping**
 
@@ -1316,6 +1318,67 @@ Now that no Standard Packages exist, the easiest way to make a player is to crea
 
 
 Resource: [Brackeys](https://www.youtube.com/watch?v=_QajrabyTJc)
+
+<a name="5d"></a>
+
+#### 	5d Camera
+
+There are a few options for cameras. For a fixed camera following the player, nest the camera into the Player. There are special camera options (such as a more flexible or switching to several fixed cameras) that use Cinemachine. 
+
+
+
+Tutorials can be found below:
+
+[Brackeys](https://www.youtube.com/watch?v=Gx9gZ9cfrys)
+
+[FilmStorm](https://www.youtube.com/watch?v=J1GgvDfmIo0)
+
+<a name="light"></a>
+
+#### 	5e Lighting
+
+Just like other 3D applications, Unity has an array of lighting options
+
+The most important of these are the following:
+
+1. Point light - light is emitted from a point
+2. Directional light - a moon or sun light. Position does not matter, but the rotation determines the angle of attack
+3. Spot light - like that of a lamp
+4. Light Area - light emitted from an area
+
+From there, we can change some properties of the lights. 
+
+* range - range of light source
+* color - color of light
+* shadow type
+  * soft shadows - blurred shadow
+  * hard shadows - very rough edged shadows
+
+
+
+Some other light options include an ambient light that lunates everything. This can be changed this in the window -> Lighting -> Settings. From there, there are many options can you can play with
+
+<a name="5f"></a>
+
+#### 	5f Prefab
+
+A prefab is simply a clone that can be dragged to the scene
+
+This means that things in other scenes can be reused
+
+To make a prefab, just drag the desired prefab object from scene to the prefabs folder
+
+<a name="5g"></a>
+
+#### 	5g Particle Systems
+
+3D particle systems are very similar to 2D particle systems, therefore so particle options, go to the 2D [particle section](#partsys) for help with the options. 
+
+For this tutorial, I will add a smoke particle effect from a pipe
+
+1. 
+
+
 
 <a name="3music"></a>
 
