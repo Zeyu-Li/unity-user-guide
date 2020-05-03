@@ -31,7 +31,7 @@ I will start at the beginning and work my way through the variations avenues you
    * [Parallax](#par)
    * [Odds and Ends](#odds)
    * [End Note](#end2d)
-     * [End Product](#finished)
+     * [End Product](#finished) (Demo)
 5. [3D](#3D)
    * [General](#5a)
    * [3D Models & Bodies](#5b)
@@ -41,10 +41,12 @@ I will start at the beginning and work my way through the variations avenues you
    * [Lighting](#light)
    * [Prefabs](#5f)
    * [Particle Systems](#5g)
-   * [Events](#5h)
+   * [Animation](#3anim)
    * [Collectibles](#3coll)
+   * [Events](#3events)
    * [Music & Sounds](#3music)
    * [Odds and Ends](#3odds)
+   * [Demo](#3demo)
 6. [Title Screen](#title)
 7. [Scripting](#script)
 8. [Building](#build)
@@ -549,7 +551,6 @@ I will do a counter for simplicity
       
       public class gems : MonoBehaviour
       {
-          // Start is called before the first frame update
           public int value = 1;
           private void OnTriggerEnter2D(Collider2D collision) {
               if (collision.gameObject.CompareTag("Player")) {
@@ -558,8 +559,9 @@ I will do a counter for simplicity
           }
       }
       ```
+      
 
-      *Note by using this, you must have one collider with the player tag or the collectable might count twice. Optionally, you can make a new empty game object with the player tag than triggers the collection
+*Note by using this, you must have one collider with the player tag or the collectable might count twice. Optionally, you can make a new empty game object with the player tag than triggers the collection
 
 
 Resource: https://www.youtube.com/watch?v=DZ-3g31jk90
@@ -1288,6 +1290,11 @@ Now that no Standard Packages exist, the easiest way to make a player is to crea
         // jump
         public float jump = 1f;
     
+        // slope
+        public bool isSliding = false;
+        public float slopeLimit = 35f;
+        private Vector3 slopeParallel;
+    
         // Update is called once per frame
         void Update()
         {
@@ -1305,20 +1312,54 @@ Now that no Standard Packages exist, the easiest way to make a player is to crea
     
             controller.Move(move*movementSpeed*Time.deltaTime);
     
+            // slopes, modified from https://answers.unity.com/questions/1502223/sliding-down-a-slope-with-a-character-controller.html
+            if (isGrounded) {
+                RaycastHit hit;
+                Physics.Raycast(transform.position, Vector3.down, out hit);
+                // Saving the normal
+                Vector3 n = hit.normal;
+    
+                // Crossing my normal with the player's up vector (if your player rotates I guess you can just use Vector3.up to create a vector parallel to the ground
+                Vector3 groundParallel = Vector3.Cross(transform.up, n);
+    
+                // Crossing the vector we made before with the initial normal gives us a vector that is parallel to the slope and always pointing down
+                slopeParallel = Vector3.Cross(groundParallel, n);
+                Debug.DrawRay(hit.point, slopeParallel * 10, Color.green);
+    
+                // Just the current angle we're standing on
+                float currentSlope = Mathf.Round(Vector3.Angle(hit.normal, transform.up));
+    
+                // If the slope is on a slope too steep and the player is Grounded the player is pushed down the slope.
+                if (currentSlope >= slopeLimit) {
+                    isSliding = true;
+                }
+                // If the player is standing on a slope that isn't too steep, is grounded, as is not sliding anymore we start a function to count time
+                else if (currentSlope < slopeLimit && isSliding) {
+                    isSliding = false;
+                }
+            }
+    
+            if (isSliding) {
+                controller.Move(slopeParallel.normalized / 2 * Time.deltaTime);
+            }
+    
             // jump
             if (Input.GetButtonDown("Jump") && isGrounded) {
                 velocity.y = Mathf.Sqrt(jump * -2f * gravity);
+                if (isSliding) {
+                    // cut jump in halve
+                    velocity.y /= 2;
+                }
             }
     
             velocity.y += gravity*Time.deltaTime;
     
             controller.Move(velocity * Time.deltaTime);
-    
         }
     }
     ```
 
-    This accounts for gravity and movement. \* Note you can change the speed of movement, gravity constant, jump check radius, under the script
+    This accounts for gravity and movement. \* Note you can change the speed of movement, gravity constant, jump check radius, under the script. Also, sliding down slopes is a given
 
 12. For the gravity to work properly, a ground check must be preformed to reset the velocity. To do this, create empty object in player and place at the feet of the player
 
@@ -1365,7 +1406,11 @@ From there, we can change some properties of the lights.
 
 
 
-Some other light options include an ambient light that lunates everything. This can be changed this in the window -> Lighting -> Settings. From there, there are many options can you can play with
+Some other light options include an ambient light that lunates everything. This can be changed this in the Window -> Rendering -> Lighting Settings. From there, there are many options can you can play with. Also in the options is to add atmospheric fog
+
+
+
+Another important things about lighting is bake lighting. Baking is a way to save space by "baking" or pre-mapping the lighting in the texture map so lighting does not need to be calculated again in real time. This may be something you would want to look into if you have problems with framerate, or just want to speed/smooth out the game. 
 
 <a name="5f"></a>
 
@@ -1385,13 +1430,121 @@ To make a prefab, just drag the desired prefab object from scene to the prefabs 
 
 For this tutorial, I will add a smoke particle effect from a pipe
 
-1. 
+1. Import the pipe. I have one provided in the models folder if you want to follow along. (Again, this model was made by myself and you can use it in your projects) 
+2. In the new model, add a new **particle system** be right clicking -> Effects -> Particle System
+3. Move, rotate and scale it to the right size (note the scale should be equal in all directions (x,y,z) for it to remain uniform)
+4. Changing the shape will determine the emission's direction
+5. Changing other attributes with the link above to the desired particle
+6. To change the texture of the particles, just drag and drop the image onto the particles
+
+
+
+<a name="3anim"></a>
+
+#### 	5h Animation
+
+Unity animations are very similar to other 3D animating software. This means there is a timeline with keyframes. For this tutorial, I will be doing a spinning, and blobbing key. 
+
+1. Place the object in the scene
+2. Go to the animation window and click **Add Animation**
+3. Save to the animation folder and set the time to whatever
+4. From there, you can click **Add Property **add something you would like to change over time
+5. For my example, I chose to key frame the rotation and position
+6. Set the start value and click the **Add Keyframe** (which looks like a diamond).
+7. Go to the end position and change the keyframe value (once changed the text area should be red) and click **Add Keyframe**
+8. Note the curves are set to non-linear (ie ease in and ease out). Therefore, to make them linear, I found the easiest way to do that would be to go the the **Curves **tab, click on the keyframe and a handle will appear. Drag the handle to the first keyframe or vice versa.
+
+Another way to the the animation is to do it in the 3D program of choice (for me Blender) and export the animation within the fbx file format
+
+
+
+<a name="3coll"></a>
+
+#### 	5i Collectables
+
+1. The collectable should have the desired tag before starting
+
+2. Within the player controller (movement.cs) check for collision with the tag. If overlap, destroy the object
+
+   ```c#
+   private void OnTriggerEnter(Collider collision) {
+       if (collision.gameObject.CompareTag("key")) {
+           Destroy(collision.gameObject);
+       }
+   }
+   ```
+
+3. Now once the player collides with the key, the key is destroyed
+
+Next thing we might want to do is add the key to our inventory. 
+
+1. Create a UI -> Canvas count object to be displayed once the object is collected
+
+   For my project, it is simply a sprite of a key appearing as I collect it
+
+2. The player should have the player tag
+
+3. Create a new script for the key once it is collected by the player
+
+4. I named my script key and had this in my script:
+
+   ```c#
+   using System.Collections;
+   using System.Collections.Generic;
+   using UnityEngine;
+   
+   public class key : MonoBehaviour
+   {
+    public GameObject menu;
+       private bool isShowing = false;
+   
+   
+       // Start is called before the first frame update
+       private void OnTriggerEnter(Collider collision) {
+           if (collision.gameObject.CompareTag("Player")) {
+               isShowing = true;
+               menu.SetActive(isShowing);
+           }
+       }
+   }
+   
+   ```
+   
+
+Now if the key is collected, the key will show up on screen
+
+
+
+<a name="3events"></a>
+
+#### 	5j Events
+
+For this tutorial, I will make an event that activates once the key is collected. After which, a door opens. 
+
+1. \* Note this is working from the last collectables section
+2. 
 
 
 
 <a name="3music"></a>
 
-#### 5 Music & Sounds
+#### 5k Music & Sounds
+
+Music and sounds are important in the gameplay as it immersives the player into the game. This section will be split into two parts, music and sounds. 
+
+**Music**
+
+Adding a track to the game is as easy as counting to 3. 
+
+1. Have a music track (you can use mine if you so choice)
+2. 
+
+**Sounds**
+
+Ambient sounds can be a great way to add that something extra to the game. This can be rustling leaves or  footsteps. For this tutorial, I will do footstep sounds.
+
+1. Have a sound to play (an excellent resource is https://freesound.org/)
+2. 
 
 
 
