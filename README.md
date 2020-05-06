@@ -1768,7 +1768,7 @@ Unfortunately, I cannot insert a demo here as it would be too long, but I can sh
 
 ![screen1](images\screen1.png)
 
-Feel free to play the game or use any of the resources for the game. I hope you've enjoyed this experience and I wish you luck in making your games. 
+Feel free to [play the game](https://github.com/Zeyu-Li/Unity-Template-3D-2019_3/releases/tag/1.0) or use any of the resources for the game. I hope you've enjoyed this experience and I wish you luck in making your games. 
 
 
 
