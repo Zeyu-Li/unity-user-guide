@@ -1143,7 +1143,7 @@ If you have experience with 3D software like Cinema 4D, Blender, or the Autodesk
 
 First off note that you do not need to make all 3D asset body. There are many asset stores with free and paid models. Usually I will use tons of free assets from the asset package (or go to [asset store](https://assetstore.unity.com/3d)) and if I need something custom, I model it with Blender. I recommend learning a 3D software before going into Unity 3D because it can be translated almost directly to Unity with light sources, objects, texture maps, etc. (my recommendation is [Blender Guru](https://www.youtube.com/user/AndrewPPrice)). 
 
-To import 3D models/bodies, you will have to import it as a fbx file (make sure you export only the things you have selected (the model) and not everything including the camera, lights, etc.) 
+To import 3D models/bodies, you will have to import it as a fbx file (make sure you export only the things you have selected (the model) and not everything including the camera, lights, etc. or you can choose to not import the camera or lights in Unity) 
 
 From there I have a model that can be dragged into the scene. Now you have the model with the materials and other properties included.
 
@@ -1454,9 +1454,29 @@ Unity animations are very similar to other 3D animating software. This means the
 7. Go to the end position and change the keyframe value (once changed the text area should be red) and click **Add Keyframe**
 8. Note the curves are set to non-linear (ie ease in and ease out). Therefore, to make them linear, I found the easiest way to do that would be to go the the **Curves **tab, click on the keyframe and a handle will appear. Drag the handle to the first keyframe or vice versa.
 
+\* If you want to move this in global space, encapsulate it in a empty object and move the empty
+
 Another way to the the animation is to do it in the 3D program of choice (for me Blender) and export the animation within the fbx file format
 
+1. Have the export fbx with animation made
 
+2. Click on the fbx in Unity and change it to **Animation**
+
+   ![3animation](images\3animation.png)
+
+3. If you have several animations, you have to separate the different animations apart by clicking the add icon (below) and adjusting the start and end frames
+
+   ![clips](images\clips.png)
+
+4. Create an animations controller and rename it. Also double click it
+
+5. It will open up the Animator window so right click and click Create State -> Empty
+
+6. Open the new empty state and rename it. Afterwards, change the motion to the imported motion (ie, it would be Torus|TorusAcion for my animation (seen above))
+
+7. Add an **Animator **to the animated object in scene and add the controller. If you enable the animator the animation plays. With this in mind, I will use an event to enable the animation [later](#3events)
+
+   
 
 <a name="3coll"></a>
 
@@ -1521,30 +1541,188 @@ Now if the key is collected, the key will show up on screen
 
 For this tutorial, I will make an event that activates once the key is collected. After which, a door opens. 
 
-1. \* Note this is working from the last collectables section
-2. 
+1. \* Note this is working from the last collectables and animation section
 
+2. Within the key script, replace with the following:
 
+   ```c#
+   using System.Collections;
+   using System.Collections.Generic;
+   using UnityEngine;
+   
+   public class key : MonoBehaviour
+   {
+       public GameObject menu;
+       private bool isShowing = false;
+   
+       // gate animation
+       public GameObject gate;
+       Animator gateAnim;
+       public GameObject goal;
+   
+       private void Start() {
+   
+           gateAnim = gate.GetComponent<Animator>();
+   
+       }
+   
+       // Start is called before the first frame update
+       private void OnTriggerEnter(Collider collision) {
+           if (collision.gameObject.CompareTag("Player")) {
+               isShowing = true;
+               menu.SetActive(isShowing);
+               gateAnim.enabled = isShowing;
+               goal.enabled = isShowing;
+           }
+       }
+   }
+   ```
+
+3. Drag the gate containing the animator into the gate box and a goal with a collider to send you to the end screen to the goal box
+
+4. Now when the player collects the key, the gate will open and a goal with appear to the player to get to
+
+Now the final set is to send the player into the end screen after colliding with the goal box
+
+1. Set up the goal box
+
+2. Set up a new scene with the endscreen (this will simply be a black screen saying to be continued)
+
+3. Make a new script in the goal object
+
+4. In the script simply type out the following
+
+   ```c#
+   using System.Collections;
+   using System.Collections.Generic;
+   using UnityEngine;
+   using UnityEngine.SceneManagement;
+   
+   public class endScene : MonoBehaviour {
+       static public bool end = true;
+       private void OnTriggerEnter(Collider collision) {
+           if (collision.gameObject.CompareTag("Player")) {
+               Done();
+           }
+       }
+   
+       // Update is called once per frame
+       void Done() {
+           SceneManager.LoadScene("title");
+       }
+   }
+   ```
+
+   
 
 <a name="3music"></a>
 
 #### 5k Music & Sounds
 
-Music and sounds are important in the gameplay as it immersives the player into the game. This section will be split into two parts, music and sounds. 
+Music and sounds are important in the gameplay as it immerses the player into the game. This section will be split into two parts, music and sounds. 
 
 **Music**
 
 Adding a track to the game is as easy as counting to 3. 
 
-1. Have a music track (you can use mine if you so choice)
-2. 
+1. Have a music track (you can use mine called happy if you so choice)
+2. Simply drag the music into the player object
+3. In the settings you can change if it plays on startup and if it loops
+
+\* note when you are playing the game, don't forget to hit unmute
 
 **Sounds**
 
-Ambient sounds can be a great way to add that something extra to the game. This can be rustling leaves or  footsteps. For this tutorial, I will do footstep sounds.
+Ambient sounds can be a great way to add that something extra to the game. This can be rustling leaves or  footsteps. For this tutorial, I will do footstep sounds when the player walks.
 
 1. Have a sound to play (an excellent resource is https://freesound.org/)
-2. 
+
+2. In the movement script replace with the following:
+
+   ```c#
+   
+   ```
+
+3. Grab the footsteps and place it in the footsteps audioclips
+
+4. 
+
+
+
+<a name="3odds"></a>
+
+#### 5l Odds and Ends
+
+**Pausing**
+
+Pausing with Unity can be made simple with one command. 
+
+1. Create script pause and drag it on your player (optionally, you can just do this in the movement folder, but this will be more organized)
+
+2. Create a pause UI element (I will be doing a simple Pause text)
+
+3. Paste in the following:
+
+   ```c#
+   using System.Collections;
+   using System.Collections.Generic;
+   using UnityEngine;
+   
+   public class pause : MonoBehaviour
+   {
+       public static bool paused = false;
+   
+       public GameObject pauseMenu;
+   
+       // Update is called once per frame
+       void Update()
+       {
+           if (Input.GetKeyDown(KeyCode.P)) {
+               Pause();
+           }
+       }
+   
+       void Pause() {
+           if (!paused) {
+               pauseMenu.SetActive(true);
+               Time.timeScale = 0f;
+           } else {
+               pauseMenu.SetActive(false);
+               Time.timeScale = 1f;
+           }
+           paused = !paused;
+       }
+   }
+   ```
+
+4. Place the UI element in the Pause menu box
+
+
+
+Resource: https://www.youtube.com/watch?v=JivuXdrIHK0
+
+**Exit Game**
+
+To quit game simply add the following onto the player:
+
+```c#
+if (Input.GetKey("escape")) // change escape to any other character if you like 
+{
+    Application.Quit();
+}
+```
+
+in the update method
+
+\* Note, of course more logic could be added to make this more complicated
+
+
+
+<a name="3demo"></a>
+
+#### 5m Demo
+
+
 
 
 
@@ -1554,7 +1732,10 @@ Ambient sounds can be a great way to add that something extra to the game. This 
 
 ### 6. Title Screen
 
-One of the last things to do is to create a title screen 
+One of the last things to do is to create a title screen. I will be basing my title screen on the 3D game.
+
+1. For my scene, it is the camera spinning through the 3D scene
+2. Overlaid is a canvas with a black panel within it
 
 
 
