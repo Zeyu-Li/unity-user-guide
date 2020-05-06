@@ -1637,15 +1637,51 @@ Ambient sounds can be a great way to add that something extra to the game. This 
 
 1. Have a sound to play (an excellent resource is https://freesound.org/)
 
-2. In the movement script replace with the following:
+2. In the movement script add the following:
 
    ```c#
+   public class movement : MonoBehaviour
+   {
    
+       // sound
+       public AudioClip[] footsteps;
+       public float volume = .5f;
+       public AudioSource listener;
+       private int index;
+       private float counter = 0;
+   
+       private void Start() {
+           listener = GetComponent<AudioSource>();
+       }
+   
+       // Update is called once per frame
+       void Update()
+       {
+           // is grounded calculations
+           isGrounded = Physics.CheckSphere(groundCheck.position, checkRadius, ground);
+   
+           float x = Input.GetAxis("Horizontal");
+           float z = Input.GetAxis("Vertical");
+   
+           if (isGrounded) {
+               velocity.y = -2f;
+               // plays walk sound
+               if (counter <= 0 && (x != 0f || z != 0f)) {
+                   index = Random.Range(0, footsteps.Length);
+                   counter = footsteps[index].length;
+                   listener.PlayOneShot(footsteps[index], volume);
+               }
+               counter -= Time.deltaTime;
+           }
+   
+           Vector3 move = transform.right * x + transform.forward * z;
+   	}
+   }
    ```
 
-3. Grab the footsteps and place it in the footsteps audioclips
+3. Grab the footsteps and place it in the footsteps audioclips after putting the number of audio clips to randomly chose from
 
-4. 
+4. Add the audio listener and change volume
 
 
 
@@ -1722,7 +1758,17 @@ in the update method
 
 #### 5m Demo
 
+I hope you enjoyed this tutorial and the finished version is here.
 
+Unfortunately, I cannot insert a demo here as it would be too long, but I can share some screenshots here:
+
+![title](images\title.png)
+
+![screen2](images\screen2.png)
+
+![screen1](images\screen1.png)
+
+Feel free to play the game or use any of the resources for the game. I hope you've enjoyed this experience and I wish you luck in making your games. 
 
 
 
@@ -1735,7 +1781,42 @@ in the update method
 One of the last things to do is to create a title screen. I will be basing my title screen on the 3D game.
 
 1. For my scene, it is the camera spinning through the 3D scene
+
 2. Overlaid is a canvas with a black panel within it
+
+3. Now you can populate with text, sprites, buttons and so forth, adjusting them to your liking
+
+4. To add functionality to the button, attach a script to the collection of menu object
+
+5. Populate with functions of the button in their own separate methods. For example, my script looks like the following:
+
+   ```c#
+   using System.Collections;
+   using System.Collections.Generic;
+   using UnityEngine;
+   using UnityEngine.SceneManagement;
+   
+   public class menu : MonoBehaviour
+   {
+       // Start is called before the first frame update
+       public void play() {
+           SceneManager.LoadScene("main");
+       }
+   
+       public void quit() {
+           Application.Quit();
+       }
+   
+   }
+   ```
+
+6. With the button selected, click on the **+** icon in the On Click part (below)
+
+   ![buttonAction](images\buttonAction.png)
+
+7. Drag the menu in the None (Object) box
+
+8. In the drop down (no function), change into the function you want to activate (it will be in the name of the script)
 
 
 
