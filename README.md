@@ -66,7 +66,7 @@ This is a combination of the [2D](https://github.com/Zeyu-Li/Unity-Tutorial-2D) 
    
    m. [Demo](#3demo)
    
-6. [Title Screen](#title)
+6. [Title Screen](#3_title)
 7. [Scripting](#script)
 8. [Building](#build)
 9. [Cloning Guide](#guide)
@@ -220,11 +220,8 @@ To start off with, set your player to be a rigid body with colliders:
 1. Select the player and add a Rigidbody 2D
 
    ![rigid](images/rigid.png)
-
 2. Open up the Rigidbody 2D and go to constraints. If you want the player to not rotate in 2D, then select **Freeze Rotation Z**
-
 3. Otherwise, add a **Collider 2D** to fit the player. Depending on how your player's form, different shapes may be better. Try the different collider options to see which ones fit best. Most of the time, a **Box Collider 2D** will work just fine. Also note that you can use multiple colliders, but remember, this is computationally more expensive.
-
 4. Also note that if you are not satisfied with Unity's default collider size, you can change the size by changing the **size** attribute
 
 Now for the movement:
@@ -481,18 +478,12 @@ We will start with 1. the collection of an item
 1. Find a sprite or animation to use as collectable. For simplicity, I will use a sprite like this:
 
    <img src="images/gem.png" alt="gem" style="zoom:33%;" />
-   
 2. Drag gem into level
-
 3. Add collider (I think box collider works best here) and check **Is Trigger**
-
 4. Add a new tag and select it of the gem
 
    ![tag](images/tag.png)
-   
 5. Within the player movement, we need to detect the collision overlaps and if an element of the tag overlaps the player, destroy object
-   
-
 This is done by putting the following code somewhere in the player movement class (not in an update or start method)
 
    ```c#
@@ -502,9 +493,7 @@ This is done by putting the following code somewhere in the player movement clas
        }
    }
    ```
-
 6. (Optional) If you want to reuse the gem, drag in Prefab folder
-
 Now we must consider the storage of the item in inventory. Note this can be as easy as a counter or a full fledged inventory
 
 I will do a counter for simplicity:
@@ -512,23 +501,14 @@ I will do a counter for simplicity:
 \* Note while we are adding a counter, it is also a convenient time to add a sound of collecting the item. 
 
 1. Resources for audio clip: [here](https://docs.unity3d.com/ScriptReference/AudioSource.Play.html) & [here](https://docs.unity3d.com/ScriptReference/AudioSource-clip.html) but I used [PlayOneShot](https://docs.unity3d.com/ScriptReference/AudioSource.PlayOneShot.html) 
-
 2. Optionally, a collecting animation or particles could also be implemented
-
 3. However, we will jump directly to a collectables counter
-
    1. Create a text layer by clicking UI -> Text - TextMeshPro
-
    2. Click on canvas -> Render Mode -> Screen Space - Camera
-
    3. Assign Render Camera to current Main camera
-
    4. Change layering order on canvas so it is in front
-
    5. Position it right. You may also chose to have a image accompanying the counter
-
    6. Create a collectablesManager script with the following:
-
       ```c#
       using System.Collections;
       using System.Collections.Generic;
@@ -555,13 +535,9 @@ I will do a counter for simplicity:
           }
       }
       ```
-
    7. Create empty to house the collectablesManager script and drag the script in
-
    8. Drag the text score into the Text field
-
    9. Now gems script and populate with the following: 
-
       ```c#
       using System.Collections;
       using System.Collections.Generic;
@@ -1061,68 +1037,70 @@ I hope you had a good taste of Unity 2D. Of course, this was just a very brief i
 
 <a name="5a"></a>
 
-#### 	5a General
+### 	5a General
 
-3D, it's where we live. Good for you for deciding to go 3D. Before we go any further, it is not recommended that you start off with a 3D project if you just started game design. Furthermore, it is recommended that you start with the previous 2D tutorial because some of the concepts and components will be similar or exact. 
+Good for you for deciding to go 3D. Before we go any further, it is not recommended that you start off with a 3D project if you are just starting out doing game design. Furthermore, it is recommended that you start with the previous 2D tutorial because some of the concepts and components will be similar or exact. 
 
 To start a 3D project, press **New** and select 3D on the pop-up screen and use the desired directory (or follow my cloning [guide](#guide) so to not start from starch). This may take some time, but after Unity finishes installing itself, we can get started. Now let's make a 3D game!
 
-\* Note this tutorial (3D) follows this [repo](https://github.com/Zeyu-Li/Unity-Template-3D-2019_3):
-
 When you start off, you will be brought up to a scene consisting of a directional light (which is like a ray/sun light) and a Camera
+
+\* Note this tutorial (3D) follows this repo: https://github.com/Zeyu-Li/Unity-Tutorial-3D
 
 
 
 <a name="5b"></a>
 
-#### 	5b 3D Models & Bodies
+### 	5b 3D Models & Bodies
 
-**Resources**
+#### Resources
 
 Before we get to 3D bodies in Unity, it is necessary to get 3D models. Unity is not build to be a 3D modeling software, so 3D objects should be created in 3D programs or imported from 3D libraries. Therefore, I will recommend some free software and libraries
 
-**Software**
+<a name="software"></a>
 
-Free
+#### Software
+
+**Free**
 
 * [Blender](https://www.blender.org/) - a very powerful open source 3D modeling, texturing, animations, and general 3D software. All my models in the exercises where made in Blender. A good place to start is with [Andrew's Donut](https://www.youtube.com/watch?v=TPrnSACiTJ4&list=PLxLGgWrla12dEW5mjO09kR2_TzPqDTXdw). New 2.8 version is very similar to all other 3D software. I **very strongly** advice you use Blender because it is free and is often much better than paid software
-* [TreeIt](https://www.evolved-software.com/treeit/treeit) - a tree generator with presets that range from cactus to palm trees
+* [TreeIt](https://www.evolved-software.com/treeit/treeit) - a tree generator with presets that range from cacti to palm trees
 
-
-
-Paid
+**Paid**
 
 * [Cinema 4D](https://www.maxon.net/en-us/products/cinema-4d/overview/) - 59.99USD/month (overpriced and not as good as Blender)
-* [Autodesk Maya](https://www.autodesk.com/products/maya/overview) - 1 620 USD/year (supposedly the industry standard) \* Note I don't know if they have a 3 year free for students like other Autodesk CAD software
+
+* [Autodesk Maya](https://www.autodesk.com/products/maya/overview) - 1 620 USD/year (supposedly the industry standard) 
+  \* Note I don't know if they have a 3 year free for students like other Autodesk CAD software
+
 * [Houdini](https://www.sidefx.com/products/houdini/) - 199 USD / year
-* [Substance Designer](https://www.substance3d.com/products/substance-designer) - $19.90/month (for **revenue** under \$100k) a node based texture designer. \* Note this might actually be useful, but from my experience, it is not easy to learn and textures can be found online or created with other programs like Adobe Illustrator and converted into normal maps in Blender.
 
+* [Substance Designer](https://www.substance3d.com/products/substance-designer) - $19.90/month (for **revenue** under \$100k) a node based texture designer
 
+  \* Note this is a really powerful piece of software, but from my experience, it is not easy to learn and textures can be found online or created with other programs like Adobe Illustrator and converted into normal maps in Blender.
 
 \* Note don't use CAD software like Fusion 360, Revit, Solidworks etc, because those are for CAD (computer assisted design) and are aimed towards engineers. Also, Blender has Architectural Plugin with many of the functionality of Autodesk Revit. 
 
+<a name="libraries"></a>
 
-
-**Libraries**
+#### Libraries
 
 * [Unity Asset Store](https://assetstore.unity.com/3d) - free and paid assets
 * [Free 3D](https://free3d.com/3d-models/unity) - be careful, some items are not for commercial applications
 
-
-
-Textures
+**Textures**
 
 * [3D Textures](https://3dtextures.me/)
 * [TTextureHaven](https://texturehaven.com/)
 * [CC0 Textures](https://cc0textures.com/)
 
+<a name="m_unity"></a>
 
+#### Unity
 
-**Unity**
+If you have experience with 3D software like Cinema 4D, Blender, or the Autodesk suit, Unity 3D will be very familiar to you. If you have not worked in a 3D environment, there is some adjusting. Note I will **not** go through the tools (ie rotate, scale, transform) for manipulating 3D bodies because they are the universal shortcuts and effects (ie. `w` for move, `e` for rotate, and `r` for scale). 
 
-If you have experience with 3D software like Cinema 4D, Blender, or the Autodesk suit, Unity 3D will be very familiar to you. If you have not worked in a 3D environment, there is some adjusting. Note I will **not** go through the tools (ie rotate, scale, transform) for manipulating 3D bodies because they are the universal shortcuts and effects. 
-
-First off note that you do not need to make all 3D asset body. There are many asset stores with free and paid models. Usually I will use tons of free assets from the asset package (or go to [asset store](https://assetstore.unity.com/3d)) and if I need something custom, I model it with Blender. I recommend learning a 3D software before going into Unity 3D because it can be translated almost directly to Unity with light sources, objects, texture maps, etc. (my recommendation is [Blender Guru](https://www.youtube.com/user/AndrewPPrice)). 
+First off note that you do not need to make all 3D asset body. There are many asset stores with free and paid models. Usually I will use tons of free assets from the asset package (or go to [asset store](https://assetstore.unity.com/3d)) and if I need something custom, I model it with Blender. I recommend learning a 3D software before going into Unity 3D because it can be translated almost directly to Unity with light sources, objects, texture maps, etc. (my recommendation is to follow [Blender Guru](https://www.youtube.com/user/AndrewPPrice) on YouTube). 
 
 To import 3D models/bodies, you will have to import it as a fbx file (make sure you export only the things you have selected (the model) and not everything including the camera, lights, etc. or you can choose to not import the camera or lights in Unity) 
 
@@ -1132,19 +1110,15 @@ From there I have a model that can be dragged into the scene. Now you have the m
 
 Of course, you can move it, rotate it, or scale it, but I will assume you know what to do that. However, if you want Unity to automatically general colliders for the model (generally good enough), 
 
-1. click on the model and under **Meshes** select **Generate Colliders**
+1. Click on the model and under **Meshes** select **Generate Colliders**
 
 ![generate](images/generate.png)
-
 \* Note for some things like platforms, **Generate Colliders** can be bad as the optimized mesh collides with the player, therefore switch to box colliders
 
-2. Then click apply. 
-
+2. Click **apply**
 3. Now Unity is generating colliders and this may take a while
 
-
-
-If you want a object to be solid and non-movable (this will use bake lighting, which I will go in more detail later), check **Static**. Remember, this will generate a bake map, which is cpu intensive and may take a lot of time depending on the size of the model. Unfortunately, if the object is really big, checking Static may actually slow things down, so keep that in mind
+If you want a object to be solid and non-movable (this will use bake lighting, which I will go in more detail later), check **Static**. Remember, this will generate a bake map, which is CPU intensive and may take a lot of time depending on the size of the model. Unfortunately, if the object is really big, checking Static may actually slow things down, so keep that in mind
 
 **Clean Snapping**
 
@@ -1153,24 +1127,19 @@ In many 3D programs, you will get options to snap to another object or vertex. T
 1. Select **Shaded Wireframe** as the view
 
    ![view](images/view.png)
-
 2. Click on the **Move Tool** (the one with the arrows in 4 directions), hold down the **v key** and it will snap to a vertex 
-
 3. With the v-key still help, drag and it will snap to another vertex 
+\* Note if you want to organize the 'layers', use **Quads** as they are 3D equivalents of empties
 
-\* note if you want to organize the 'layers', use **Quads** as they are 3D equivalents of empties
-
-\* also, if you enable static, 
-
+Resource: https://youtu.be/NjflKgMepQs
 
 
-Resource: This can be done if you follow [this](https://youtu.be/NjflKgMepQs)
 
 <a name="5c"></a>
 
-#### 	5c Movement
+### 	5c Movement
 
-**Legacy *note working past version 2019**
+**Legacy Way:**
 
 ~~For movement, generally, Unity's Standard Package can be used so no bones, animations, or controls need to be wired. I recommend importing Unity's character package. This is done by,~~
 
@@ -1178,27 +1147,20 @@ Resource: This can be done if you follow [this](https://youtu.be/NjflKgMepQs)
 2. ~~In a new player folder, go to Assets -> Import Package -> Characters and click **Import** (this may or may not work and thus, you may need to import all of the standard package and purge unused)~~
 3. ~~In the imported Standard Assets, go to Characters -> FirstPersonCharacter->Prefabs->FPSController and drag it into the scene~~
 
-New way:
+**New way:**
 
 Now that no Standard Packages exist, the easiest way to make a player is to create it from scratch
 
 1. New empty object named player
-
 2. add a **character controller** as a component to the empty
-
    1. You can change the slope limit (limit angle at which you traverse a slope)
    2. Skin width
    3. Center at which the character is based on 
    4. Radius and Height of the capsule containing the player
-
 3. Add a camera to the empty, otherwise, move the empty exactly to the existing camera and move it such that it does not overlap meshes
-
 4. At this point, you can add the mesh that is your player and have it hold up to some animations or preloaded with animations, but for this tutorial, I will use a yellow capsule
-
 5. Next we want to control the camera with the mouse so create a cameraControl script in the scripts folder
-
 6. Paste the following in
-
    ```c#
    using System.Collections;
    using System.Collections.Generic;
@@ -1235,17 +1197,11 @@ Now that no Standard Packages exist, the easiest way to make a player is to crea
        }
    }
    ```
-
 7. Optionally, you can smooth out the camera using the Lerp method
-
 8. Drag the player empty object into the Transform
-
 9. Next is movement
-
 10. Add a new player movement script to the empty player object
-
 11. Paste the following
-
     ```c#
     using System.Collections;
     using System.Collections.Generic;
@@ -1339,34 +1295,36 @@ Now that no Standard Packages exist, the easiest way to make a player is to crea
         }
     }
     ```
-
-    This accounts for gravity and movement. \* Note you can change the speed of movement, gravity constant, jump check radius, under the script. Also, sliding down slopes is a given
-
+    This accounts for gravity and movement
+    \* Note you can change the speed of movement, gravity constant, jump check radius, under the script. Also, sliding down slopes is a given
 12. For the gravity to work properly, a ground check must be preformed to reset the velocity. To do this, create empty object in player and place at the feet of the player
-
 13. Add new layer of ground to preform jumps and gravity checks on and apply it to the models
-
-
 
 Resource: [Brackeys](https://www.youtube.com/watch?v=_QajrabyTJc)
 
+
+
 <a name="5d"></a>
 
-#### 	5d Camera
+### 	5d Camera
 
-There are a few options for cameras. For a fixed camera following the player, nest the camera into the Player. There are special camera options (such as a more flexible or switching to several fixed cameras) that use Cinemachine. 
+There are a few options for cameras. For a fixed camera following the player:
+
+1. Nest the camera into the Player
+2. Move to the right position and angle
 
 
-
-Tutorials can be found below:
+There are special camera options (such as a more flexible or switching to several fixed cameras) that use Cinemachine. Tutorials for Cinemachine can be found below:
 
 [Brackeys](https://www.youtube.com/watch?v=Gx9gZ9cfrys)
 
 [FilmStorm](https://www.youtube.com/watch?v=J1GgvDfmIo0)
 
+
+
 <a name="light"></a>
 
-#### 	5e Lighting
+### 	5e Lighting
 
 Just like other 3D applications, Unity has an array of lighting options
 
@@ -1377,7 +1335,7 @@ The most important of these are the following:
 3. Spot light - like that of a lamp
 4. Light Area - light emitted from an area
 
-From there, we can change some properties of the lights. 
+From there, we can change some properties of the lights:
 
 * range - range of light source
 * color - color of light
@@ -1385,17 +1343,15 @@ From there, we can change some properties of the lights.
   * soft shadows - blurred shadow
   * hard shadows - very rough edged shadows
 
-
-
-Some other light options include an ambient light that lunates everything. This can be changed this in the Window -> Rendering -> Lighting Settings. From there, there are many options can you can play with. Also in the options is to add atmospheric fog
-
-
+Some other light options include an ambient light that lunates everything. This can be changed this in the Window -> Rendering -> Lighting Settings. From there, there are many options can you can play with. Also in the options is to add atmospheric fog.
 
 Another important things about lighting is bake lighting. Baking is a way to save space by "baking" or pre-mapping the lighting in the texture map so lighting does not need to be calculated again in real time. This may be something you would want to look into if you have problems with framerate, or just want to speed/smooth out the game. 
 
+
+
 <a name="5f"></a>
 
-#### 	5f Prefab
+### 	5f Prefab
 
 A prefab is simply a clone that can be dragged to the scene
 
@@ -1403,13 +1359,15 @@ This means that things in other scenes can be reused
 
 To make a prefab, just drag the desired prefab object from scene to the prefabs folder
 
+
+
 <a name="5g"></a>
 
-#### 	5g Particle Systems
+### 	5g Particle Systems
 
-3D particle systems are very similar to 2D particle systems, therefore so particle options, go to the 2D [particle section](#partsys) for help with the options. 
+3D particle systems are very similar to 2D particle systems, therefore so particle options, go to the 2D [particle section](https://github.com/Zeyu-Li/unity-user-guide#4f-particle-system) for help with the options
 
-For this tutorial, I will add a smoke particle effect from a pipe
+For this tutorial, I will just be adding a smoke particle effect from a pipe
 
 1. Import the pipe. I have one provided in the models folder if you want to follow along. (Again, this model was made by myself and you can use it in your projects) 
 2. In the new model, add a new **particle system** be right clicking -> Effects -> Particle System
@@ -1422,9 +1380,9 @@ For this tutorial, I will add a smoke particle effect from a pipe
 
 <a name="3anim"></a>
 
-#### 	5h Animation
+### 	5h Animation
 
-Unity animations are very similar to other 3D animating software. This means there is a timeline with keyframes. For this tutorial, I will be doing a spinning, and blobbing key. 
+Unity animations are very similar to other 3D animating software. This means there is a timeline with keyframes. For this tutorial, I will be doing a spinning and blobbing key. 
 
 1. Place the object in the scene
 2. Go to the animation window and click **Add Animation**
@@ -1440,28 +1398,22 @@ Unity animations are very similar to other 3D animating software. This means the
 Another way to the the animation is to do it in the 3D program of choice (for me Blender) and export the animation within the fbx file format
 
 1. Have the export fbx with animation made
-
 2. Click on the fbx in Unity and change it to **Animation**
 
    ![3animation](images/3animation.png)
-
 3. If you have several animations, you have to separate the different animations apart by clicking the add icon (below) and adjusting the start and end frames
 
    ![clips](images/clips.png)
-
 4. Create an animations controller and rename it. Also double click it
-
 5. It will open up the Animator window so right click and click Create State -> Empty
-
 6. Open the new empty state and rename it. Afterwards, change the motion to the imported motion (ie, it would be Torus|TorusAcion for my animation (seen above))
-
 7. Add an **Animator **to the animated object in scene and add the controller. If you enable the animator the animation plays. With this in mind, I will use an event to enable the animation [later](#3events)
 
    
 
 <a name="3coll"></a>
 
-#### 	5i Collectables
+### 	5i Collectables
 
 1. The collectable should have the desired tag before starting
 
@@ -1480,7 +1432,6 @@ Another way to the the animation is to do it in the 3D program of choice (for me
 Next thing we might want to do is add the key to our inventory. 
 
 1. Create a UI -> Canvas count object to be displayed once the object is collected
-
    For my project, it is simply a sprite of a key appearing as I collect it
 
 2. The player should have the player tag
@@ -1510,7 +1461,6 @@ Next thing we might want to do is add the key to our inventory.
    }
    
    ```
-   
 
 Now if the key is collected, the key will show up on screen
 
@@ -1518,14 +1468,13 @@ Now if the key is collected, the key will show up on screen
 
 <a name="3events"></a>
 
-#### 	5j Events
+### 	5j Events
 
 For this tutorial, I will make an event that activates once the key is collected. After which, a door opens. 
 
-1. \* Note this is working from the last collectables and animation section
+\* Note this is working from the last collectables and animation section
 
-2. Within the key script, replace with the following:
-
+1. Within the key script, replace with the following:
    ```c#
    using System.Collections;
    using System.Collections.Generic;
@@ -1542,7 +1491,7 @@ For this tutorial, I will make an event that activates once the key is collected
        public GameObject goal;
    
        private void Start() {
-   
+
            gateAnim = gate.GetComponent<Animator>();
    
        }
@@ -1558,21 +1507,15 @@ For this tutorial, I will make an event that activates once the key is collected
        }
    }
    ```
-
-3. Drag the gate containing the animator into the gate box and a goal with a collider to send you to the end screen to the goal box
-
-4. Now when the player collects the key, the gate will open and a goal with appear to the player to get to
+2. Drag the gate containing the animator into the gate box and a goal with a collider to send you to the end screen to the goal box
+3. Now when the player collects the key, the gate will open and a goal with appear to the player to get to
 
 Now the final set is to send the player into the end screen after colliding with the goal box
 
 1. Set up the goal box
-
 2. Set up a new scene with the endscreen (this will simply be a black screen saying to be continued)
-
 3. Make a new script in the goal object
-
 4. In the script simply type out the following
-
    ```c#
    using System.Collections;
    using System.Collections.Generic;
@@ -1594,11 +1537,11 @@ Now the final set is to send the player into the end screen after colliding with
    }
    ```
 
-   
+
 
 <a name="3music"></a>
 
-#### 5k Music & Sounds
+### 5k Music & Sounds
 
 Music and sounds are important in the gameplay as it immerses the player into the game. This section will be split into two parts, music and sounds. 
 
@@ -1610,7 +1553,7 @@ Adding a track to the game is as easy as counting to 3.
 2. Simply drag the music into the player object
 3. In the settings you can change if it plays on startup and if it loops
 
-\* note when you are playing the game, don't forget to hit unmute
+\* Note when you are playing the game, don't forget to hit unmute
 
 **Sounds**
 
@@ -1668,18 +1611,17 @@ Ambient sounds can be a great way to add that something extra to the game. This 
 
 <a name="3odds"></a>
 
-#### 5l Odds and Ends
+### 5l Odds and Ends
 
-**Pausing**
+<a name="3_pausing"></a>
+
+#### Pausing
 
 Pausing with Unity can be made simple with one command. 
 
 1. Create script pause and drag it on your player (optionally, you can just do this in the movement folder, but this will be more organized)
-
 2. Create a pause UI element (I will be doing a simple Pause text)
-
 3. Paste in the following:
-
    ```c#
    using System.Collections;
    using System.Collections.Generic;
@@ -1711,14 +1653,15 @@ Pausing with Unity can be made simple with one command.
        }
    }
    ```
-
 4. Place the UI element in the Pause menu box
-
-
 
 Resource: https://www.youtube.com/watch?v=JivuXdrIHK0
 
-**Exit Game**
+
+
+<a name="3_exit"></a>
+
+#### Exit Game
 
 To quit game simply add the following onto the player:
 
@@ -1737,7 +1680,7 @@ in the update method
 
 <a name="3demo"></a>
 
-#### 5m Demo
+### 5m Demo
 
 I hope you enjoyed this tutorial and the finished version is here.
 
@@ -1749,13 +1692,13 @@ Unfortunately, I cannot insert a demo here as it would be too long, but I can sh
 
 ![screen1](images/screen1.png)
 
-Feel free to [play the game](https://github.com/Zeyu-Li/Unity-Template-3D-2019_3/releases/tag/1.0) or use any of the resources for the game. I hope you've enjoyed this experience and I wish you luck in making your games. 
-
-
+Feel free to [play the game](https://github.com/Zeyu-Li/Unity-Template-3D-2019_3/releases/tag/1.0) or use any of the resources for the game. I hope you've enjoyed this experience and I wish you luck in making your games!
 
 [🔝 Back to Top](#top)
 
-<a name="title"></a>
+
+
+<a name="3_title"></a>
 
 ### 6. Title Screen
 
@@ -1834,15 +1777,11 @@ public class movement : MonoBehaviour
 
 You will notice that at the top there are imports from Unity's other libraries using the **using** keyword. Afterwards, Unity defines the script as a class*. The class is defined as public so other scripts and Unity can assess and utilize this class. The name you gave the script will follow the **class** keyword. Afterwards, **MonoBehaviour** is defined as what movement inherits from. Think of this as your script **extending** from class MonoBehaviour. 
 
+\* Note a class is a data structure that holds a collection of information on the class (ie. its attributes and methods). 
 
-
-Below that and indented, we see void Start() and void Update(). As the comments suggest, void Start() occurs before the first frame update and void Update() is called once per frame. Note **void** means there will not be a return value (ie no return statement).
+Below that and indented, we see void Start() and void Update(). As the comments suggest, void Start() occurs before the first frame update and void Update() is called once per frame. Note **void** means there will not be a return value (ie. no return statement).
 
 Also, there are different methods of MonoBehaviour such as **FixedUpdate()** that may update more or less than once per frame. This will be important for any physics related functions
-
-
-
-\* A class is a data structure that holds a collection of information on the class (ie, its attributes and methods). 
 
 A list of other functions and methods that can be used can be found on the [Unity Documentation](https://docs.unity3d.com/ScriptReference/MonoBehaviour.html) site, however, the most important thing about learning and debugging Unity is to use
 
@@ -1874,8 +1813,6 @@ So you are finished your game. You need to disturbed the game. This is done thro
 
 6. Select the folder and wait for it to build
 
-
-
 \* Note if you did not add an exit game button, the only way to exit is to close the program externally or Alt-f4
 
 
@@ -1884,9 +1821,9 @@ So you are finished your game. You need to disturbed the game. This is done thro
 
 ### 9. Cloning Guide
 
-From my [GitHub](https://github.com/Zeyu-Li?tab=repositories):
+To download the finished projects:
 
-1. Find the right Unity Repo to clone from my account (ie [Unity-Template-2D-2019_3](https://github.com/Zeyu-Li/Unity-Template-2D-2019_3), [Unity-Template-3D-2019](https://github.com/Zeyu-Li/Unity-Template-3D-2019_3)) 
+1. Find the right Unity Repo to clone from my account (https://github.com/Zeyu-Li/Unity-Tutorial-2D or https://github.com/Zeyu-Li/Unity-Tutorial-3D) 
 
 2. Download ZIP after clicking Clone or download
 
@@ -1899,6 +1836,12 @@ From my [GitHub](https://github.com/Zeyu-Li?tab=repositories):
 5. The project should appear in Projects and it is done
 
 6. Click on the project to open it
+
+  \* Note if you want the project at different steps for 2D click on commits or https://github.com/Zeyu-Li/Unity-Tutorial-2D/commits/master and between Feb 26, 2020 `added logo` commit to April 12, 2020 `finished Unity template game` is when various steps where completed. To download the project file at these times, click on the bracket thing (see below) and repeat above from step 2
+
+![history](images/history.jpg)
+
+else for 3D, go to https://github.com/Zeyu-Li/Unity-Tutorial-3D/commits/master and between April 13, 2020 `added imaged` commit to May 6, 2020 `finished game` is when various steps where completed. 
 
 
 
