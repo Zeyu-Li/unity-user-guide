@@ -1015,6 +1015,13 @@ I hope you had a good taste of Unity 2D. Of course, this was just a very brief i
 
 ![game](demos/game.gif)
 
+If you want to play it yourself (On windows, sorry Unix users 😜 need to build from source yourself):
+
+1. Go to the the releases on the GitHub or https://github.com/Zeyu-Li/Unity-Tutorial-2D/releases/tag/1.0 
+2. Download the template_build.zip
+3. Unzip
+4. Run the executable!
+
 [🔝 Back to Top](#top)
 
 
@@ -1672,7 +1679,7 @@ in the update method
 
 I hope you enjoyed this tutorial and the finished version is here.
 
-Unfortunately, I cannot insert a demo here as it would be too long, but I can share some screenshots here:
+Unfortunately, I cannot insert a demo here as it would be too long (if you want to download the game see instructions below), but I can share some screenshots here:
 
 ![title](images/title.png)
 
@@ -1681,6 +1688,13 @@ Unfortunately, I cannot insert a demo here as it would be too long, but I can sh
 ![screen1](images/screen1.png)
 
 Feel free to [play the game](https://github.com/Zeyu-Li/Unity-Template-3D-2019_3/releases/tag/1.0) or use any of the resources for the game. I hope you've enjoyed this experience and I wish you luck in making your games!
+
+If you want to play it yourself (On windows, sorry Unix users 😜 need to build from source yourself):
+
+1. Go to the the releases on the GitHub or https://github.com/Zeyu-Li/Unity-Tutorial-3D/releases/tag/1.0 
+2. Download the 3D_template_game.zip
+3. Unzip
+4. Run the executable!
 
 [🔝 Back to Top](#top)
 
