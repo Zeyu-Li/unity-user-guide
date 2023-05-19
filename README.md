@@ -69,7 +69,7 @@ This is a combination of the [2D](https://github.com/Zeyu-Li/Unity-Tutorial-2D) 
 
 Before installing, note that Unity is **completely free**, if you or your company makes less than $100 000 (USD). 
 
-Follow the link [here](https://store.unity.com/download) and download the free installer (the plus version is definitely not necessary). Follow the instructions and download the installer. The Unity installer is simple and easy to use nevertheless, this [video](https://www.youtube.com/watch?v=KMuMhA6Lk0I) for Windows is a tutorial in installing it. Also note that you will may need a Unity account or just use your Google/Facebook account to sign in. 
+Follow the link [here](https://store.unity.com/download) and download the free installer (the plus version is definitely not necessary). Follow the instructions and download the installer. The Unity installer is simple and easy to use nevertheless, this [video](https://www.youtube.com/watch?v=KMuMhA6Lk0I) for Windows is a tutorial in installing it. Also note that you may need a Unity account or just use your Google/Facebook account to sign in. 
 
 If you want a new version of Unity, go to the Unity Hub and click the **Installs** tab on the left and **ADD** (top right) the desired version (it is recommended that you pick a version with **long term support** or LTS); however do be warned that this tutorial was made in **2019.3** so in newer versions, things might have moved places or removed entirely 😞. Afterwards, the installation will take quite a while, even with a fast internet connection. 
 
@@ -81,7 +81,7 @@ When installing Unity, it might ask you to install **Visual Studio** along-side 
 
 ### 2. General
 
-**Unity** is a 3D game engine built in **C#** but can be used for 2D. Before you freak out about programming, let me assure, you it is quite trivial. If you have programmed before especially in C++, it is a huge plus. If you have not, don't worry, it's just a bunch of copy and pasting. The most important thing is don't be frustrated and 
+**Unity** is a 3D game engine built in **C#** but can be used for 2D. Before you freak out about programming, let me assure you, it is quite trivial. If you have programmed before, especially in C++, it is a huge plus. If you have not, don't worry, it's just a bunch of copy and pasting. The most important thing is don't be frustrated and 
 
 ```c#
 Debug.Log() // logs to Unity console
@@ -89,9 +89,7 @@ Debug.Log() // logs to Unity console
 
 is your friend. 
 
-Being organized in Unity is a must, especially for big projects. Have organized folder will help a ton, in addition, using empties as folders within scene is *+1 organization*. 
-
-
+Being organized in Unity is a must, especially for big projects. Have organized folder will help a ton, in addition, using empties as folders within the scene is *+1 organization*. 
 
 <a name="unity"></a>
 
@@ -103,7 +101,7 @@ Unity is a panel based application. These panels can be rearranged however you l
 
 This is my default setup. The **Scene** panel is the most important viewport. This is where you modify the scene. The **Game** scene only turns on if you hit play. It is a preview of what the user will see if you build the current scene.
 
-On the right hand side, we have the **Project** directory (folder) panel on the bottom. This is where all your assets are (ie art, music, scripts). The **Hierarchy** is like a layers panel in Photoshop. It is an arrangement of all elements in the scene. For every element of the scene can be hidden from the view by hitting eye button when hovering on the element. The lock button is the pointer icon. The **Inspector** contains all modifiable aspect of an element along with info. This is where you drag scripts in the element.
+On the right hand side, we have the **Project** directory (folder) panel on the bottom. This is where all your assets are (ie art, music, scripts). The **Hierarchy** is like a layers panel in Photoshop. It is an arrangement of all elements in the scene. For every element of the scene can be hidden from the view by hitting the eye button when hovering on the element. The lock button is the pointer icon. The **Inspector** contains all modifiable aspects of an element along with info. This is where you drag scripts in the element.
 
 Other panels include a console, which will output when the game is run. The **Animator** and **Animation** go hand in hand and creates animation for sprites. 
 
@@ -117,11 +115,11 @@ Other panels include a console, which will output when the game is run. The **An
 
 ### 	4a General
 
-So you've decide to make a 2D game. Great! Who needs modelling and lighting anyways? 
+So you've decided to make a 2D game. Great! Who needs modelling and lighting anyways? 
 
-2D games are secretly 3D, what does that mean? Think of Unity 2D as a bunch of layers like in Photoshop, Gimp, After Effects, or Illustrator. The closest to the camera is picked up first and blocks the ones behind it. As a 2D world, lighting is global (unless you want enable an experimental local lighting feature). To start a new 2D game, click **New** and select 2D on the pop-up screen and use the desired directory (or follow my cloning [guide](#guide) so to not start from starch). This may take some time, but after Unity finishes installing itself, we can get started. Now let's make a player and make it move!
+2D games are secretly 3D, what does that mean? Think of Unity 2D as a bunch of layers like in Photoshop, Gimp, After Effects, or Illustrator. The closest to the camera is picked up first and blocks the ones behind it. As a 2D world, lighting is global (unless you want to enable an experimental local lighting feature). To start a new 2D game, click **New** and select 2D on the pop-up screen and use the desired directory (or follow my cloning [guide](#guide) so to not start from starch). This may take some time, but after Unity finishes installing itself, we can get started. Now let's make a player and make it move!
 
-*Note, part of the tutorial (2D) follows this repo: [Unity-Tutorial-2D](https://github.com/Zeyu-Li/Unity-Template-2D-2019_3)
+*Note, part of the tutorial (2D) follows this repo: [Unity-Tutorial-2D](https://github.com/Zeyu-Li/Unity-Tutorial-2D)
 
 
 
@@ -201,15 +199,18 @@ Resources: [Brackeys](https://www.youtube.com/watch?v=ryISV_nH8qw)
 
 ### 4c Movement
 
-Movement is critical in all games, whether the movement is limited to left or right, or games that in 3D. On the internet there are may sources that claim the perfect jump, but only you can decide that based on what type of gameplay you want. 
+Movement is critical in all games, whether the movement is limited to left or right, or games that are in 3D. On the internet there are many sources that claim the perfect jump, but only you can decide that based on what type of gameplay you want. 
 
 To start off with, set your player to be a rigid body with colliders:
 
 1. Select the player and add a Rigidbody 2D
 
-   ![rigid](images/rigid.png)
+   ![rigid](../_games/Unity-Template-2D-2019_3/images/rigid.png)
+
 2. Open up the Rigidbody 2D and go to constraints. If you want the player to not rotate in 2D, then select **Freeze Rotation Z**
+
 3. Otherwise, add a **Collider 2D** to fit the player. Depending on how your player's form, different shapes may be better. Try the different collider options to see which ones fit best. Most of the time, a **Box Collider 2D** will work just fine. Also note that you can use multiple colliders, but remember, this is computationally more expensive.
+
 4. Also note that if you are not satisfied with Unity's default collider size, you can change the size by changing the **size** attribute
 
 Now for the movement:
@@ -225,7 +226,7 @@ In the movement class, put
 
 ```c#
 // inits
-// hoziontal speed
+// horizontal speed
 public float speed = 10f;
 
 // vertical jump
@@ -322,26 +323,26 @@ Resource: https://www.youtube.com/watch?v=j111eKN8sJw
 
 ### 	4d Camera
 
-The camera will capture things on from the scene to project onto the play window. 
+1. The camera will capture things from the scene to project onto the play window. 
 
-The most important setting for a camera object is the size. Changing the size will change the view for the user. 
+   The most important setting for a camera object is the size. Changing the size will change the view for the user. 
 
-<a name="background"></a>
+   <a name="background"></a>
 
-**Background**
+   #### Background
 
-A background can be achieved by placed in the camera and setting the **Order in Layer** to some negative number, such that it is behind the foreground objects
+   A background can be achieved by placed in the camera and setting the **Order in Layer** to some negative number, such that it is behind the foreground objects
 
-<a name="camera_follow"></a>
+   <a name="camera_follow"></a>
 
-**Camera Follow**
+   #### Camera Follow
 
-When implementing a camera, there are two options, however, we will through the harder option first to get use to how cameras work
+   When implementing a camera, there are two options, however, we will through the harder option first to get use to how cameras work
 
-1. We will create a camera follow script with the following:
+   1. We will create a camera follow script with the following:
 
    ```c#
-   // selects targe to be fixed on
+   // selects target to be fixed on
    public Transform target;
    public float smoothing = 0.12f;
    
@@ -472,7 +473,7 @@ We will start with 1. the collection of an item
 
    ![tag](images/tag.png)
 5. Within the player movement, we need to detect the collision overlaps and if an element of the tag overlaps the player, destroy object
-This is done by putting the following code somewhere in the player movement class (not in an update or start method)
+   This is done by putting the following code somewhere in the player movement class (not in an update or start method)
 
    ```c#
    private void OnTriggerEnter2D(Collider2D collision) {
@@ -614,13 +615,13 @@ To add different actions connected to the original animation:
           }
       }
       ```
-\* Note if you don't want the animation to loop, go to the animation in where you saved your animation and uncheck **Loop Time**
+      \* Note if you don't want the animation to loop, go to the animation in where you saved your animation and uncheck **Loop Time**
 
 <a name="events"></a>
 
 ### 4i Events
 
-Events are add much needed interactions into a game, but keep in mind that every event requires a lot of work. With this in mind, let's implement a button that triggers a platform. 
+Events add much needed interactions into a game, but keep in mind that every event requires a lot of work. With this in mind, let's implement a button that triggers a platform. 
 
   1. Have a button and platform object ready. If not, feel free to use the ones below
 
@@ -691,7 +692,7 @@ As you can see, using what we already know, we can get a lot of events to work! 
 
 ### 4j Pixelated
 
-Perhaps you want your game to have a pixelized feel, thankfully, it is not too much work to do that with Unity. 
+Perhaps you want your game to have a pixelated feel, thankfully, it is not too much work to do that with Unity. 
 
 **General rules and tips**
 
@@ -930,8 +931,8 @@ Enemies are an important yet complicated thing. They can be static, or mobile. H
      ![detector](images/detector.png)
   6. Place empty object in front of the creature such that if that empty interacts a wall, the creature will turn
   7. Drag the creature itself into the creature box and the empty in the wall box
-  8. Change speed to desired amount and check **Smart Turn** to make the creature turn instead of falling off an ledge
-  9. If you want the creature to not walk off the edge, also cone the empty object and put it bellow the feet of the player so it is always touching the ground. Once it is not touching the ground, it should turn around
+  8. Change speed to desired amount and check **Smart Turn** to make the creature turn instead of falling off a ledge
+  9. If you want the creature to not walk off the edge, also clone the empty object and put it below the feet of the player so it is always touching the ground. Once it is not touching the ground, it should turn around
 
 
 
@@ -1005,7 +1006,7 @@ in the update method
 
 ### 4n End Note
 
-I hope you had a good taste of Unity 2D. Of course, this was just a very brief introduction and there are many more aspects of Unity not covered; ie UI buttons. You can go to my Unity 3D course below if you want to learn more, or start creating your 2D game. There are many more resources online for you to check out if you need help, or want inspiration. These resource can be found in [section 11](#Help) and thank you for joining me with this course. If you have any feedback, feel free to go to the [GitHub](https://github.com/Zeyu-Li/Unity-Tutorial-2D/discussions) and open a discussion. Again, thanks for viewing and good luck to your future Unity endeavors. 
+I hope you had a good taste of Unity 2D. Of course, this was just a very brief introduction and there are many more aspects of Unity not covered; ie UI buttons. You can go to my Unity 3D course below if you want to learn more, or start creating your 2D game. There are many more resources online for you to check out if you need help, or want inspiration. These resources can be found in [section 11](#Help) and thank you for joining me with this course. If you have any feedback, feel free to go to the [GitHub](https://github.com/Zeyu-Li/Unity-Tutorial-2D/discussions) and open a discussion. Again, thanks for viewing and good luck to your future Unity endeavors. 
 
 
 
@@ -1017,7 +1018,7 @@ I hope you had a good taste of Unity 2D. Of course, this was just a very brief i
 
 If you want to play it yourself (On windows, sorry Unix users 😜 need to build from source yourself):
 
-1. Go to the the releases on the GitHub or https://github.com/Zeyu-Li/Unity-Tutorial-2D/releases/tag/1.0 
+1. Go to the releases on the GitHub or https://github.com/Zeyu-Li/Unity-Tutorial-2D/releases/tag/1.0 
 2. Download the template_build.zip
 3. Unzip
 4. Run the executable!
@@ -1050,7 +1051,7 @@ When you start off, you will be brought up to a scene consisting of a directiona
 
 #### Resources
 
-Before we get to 3D bodies in Unity, it is necessary to get 3D models. Unity is not build to be a 3D modeling software, so 3D objects should be created in 3D programs or imported from 3D libraries. Therefore, I will recommend some free software and libraries
+Before we get to 3D bodies in Unity, it is necessary to get 3D models. Unity is not built to be a 3D modeling software, so 3D objects should be created in 3D programs or imported from 3D libraries. Therefore, I will recommend some free software and libraries
 
 <a name="software"></a>
 
@@ -1113,11 +1114,11 @@ Of course, you can move it, rotate it, or scale it, but I will assume you know w
 2. Click **apply**
 3. Now Unity is generating colliders and this may take a while
 
-If you want a object to be solid and non-movable (this will use bake lighting, which I will go in more detail later), check **Static**. Remember, this will generate a bake map, which is CPU intensive and may take a lot of time depending on the size of the model. Unfortunately, if the object is really big, checking Static may actually slow things down, so keep that in mind
+If you want an object to be solid and non-movable (this will use bake lighting, which I will go into more detail later), check **Static**. Remember, this will generate a bake map, which is CPU intensive and may take a lot of time depending on the size of the model. Unfortunately, if the object is really big, checking Static may actually slow things down, so keep that in mind
 
 **Clean Snapping**
 
-In many 3D programs, you will get options to snap to another object or vertex. This can be done in Unity. To achieve this,
+In many 3D programs, you will gUnity is not buildet options to snap to another object or vertex. This can be done in Unity. To achieve this,
 
 1. Select **Shaded Wireframe** as the view
 
@@ -1163,7 +1164,7 @@ Now that no Standard Packages exist, the easiest way to make a player is to crea
    
    public class cameraControl : MonoBehaviour
    {
-       // sensitivety of mouse
+       // sensitivity of mouse
        public float mouseSpeed = 100f;
    
        // place camera here
@@ -1292,8 +1293,8 @@ Now that no Standard Packages exist, the easiest way to make a player is to crea
     ```
     This accounts for gravity and movement
     \* Note you can change the speed of movement, gravity constant, jump check radius, under the script. Also, sliding down slopes is a given
-12. For the gravity to work properly, a ground check must be preformed to reset the velocity. To do this, create empty object in player and place at the feet of the player
-13. Add new layer of ground to preform jumps and gravity checks on and apply it to the models
+12. For the gravity to work properly, a ground check must be performed to reset the velocity. To do this, create empty object in player and place at the feet of the player
+13. Add new layer of ground to perform jumps and gravity checks on and apply it to the models
 
 Resource: [Brackeys](https://www.youtube.com/watch?v=_QajrabyTJc)
 
@@ -1338,9 +1339,9 @@ From there, we can change some properties of the lights:
   * soft shadows - blurred shadow
   * hard shadows - very rough edged shadows
 
-Some other light options include an ambient light that lunates everything. This can be changed this in the Window -> Rendering -> Lighting Settings. From there, there are many options can you can play with. Also in the options is to add atmospheric fog.
+Some other light options include an ambient light that lunates everything. This can be changed in the Window -> Rendering -> Lighting Settings. From there, there are many options you can play with. Also in the options is to add atmospheric fog.
 
-Another important things about lighting is bake lighting. Baking is a way to save space by "baking" or pre-mapping the lighting in the texture map so lighting does not need to be calculated again in real time. This may be something you would want to look into if you have problems with framerate, or just want to speed/smooth out the game. 
+Another important thing about lighting is bake lighting. Baking is a way to save space by "baking" or pre-mapping the lighting in the texture map so lighting does not need to be calculated again in real time. This may be something you would want to look into if you have problems with framerate, or just want to speed/smooth out the game. 
 
 
 
@@ -1386,11 +1387,11 @@ Unity animations are very similar to other 3D animating software. This means the
 5. For my example, I chose to key frame the rotation and position
 6. Set the start value and click the **Add Keyframe** (which looks like a diamond).
 7. Go to the end position and change the keyframe value (once changed the text area should be red) and click **Add Keyframe**
-8. Note the curves are set to non-linear (ie ease in and ease out). Therefore, to make them linear, I found the easiest way to do that would be to go the the **Curves **tab, click on the keyframe and a handle will appear. Drag the handle to the first keyframe or vice versa.
+8. Note the curves are set to non-linear (ie ease in and ease out). Therefore, to make them linear, I found the easiest way to do that would be to go the Curves **tab, click on the keyframe and a handle will appear. Drag the handle to the first keyframe or vice versa.
 
 \* If you want to move this in global space, encapsulate it in a empty object and move the empty
 
-Another way to the the animation is to do it in the 3D program of choice (for me Blender) and export the animation within the fbx file format
+Another way to the animation is to do it in the 3D program of choice (for me Blender) and export the animation within the fbx file format
 
 1. Have the export fbx with animation made
 2. Click on the fbx in Unity and change it to **Animation**
@@ -1402,7 +1403,7 @@ Another way to the the animation is to do it in the 3D program of choice (for me
 4. Create an animations controller and rename it. Also double click it
 5. It will open up the Animator window so right click and click Create State -> Empty
 6. Open the new empty state and rename it. Afterwards, change the motion to the imported motion (ie, it would be Torus|TorusAcion for my animation (seen above))
-7. Add an **Animator **to the animated object in scene and add the controller. If you enable the animator the animation plays. With this in mind, I will use an event to enable the animation [later](#3events)
+7. Add an **Animator **to the animated object in the scene and add the controller. If you enable the animator the animation plays. With this in mind, I will use an event to enable the animation [later](#3events)
 
    
 
@@ -1486,7 +1487,7 @@ For this tutorial, I will make an event that activates once the key is collected
        public GameObject goal;
    
        private void Start() {
-
+   
            gateAnim = gate.GetComponent<Animator>();
    
        }
@@ -1598,7 +1599,7 @@ Ambient sounds can be a great way to add that something extra to the game. This 
    }
    ```
 
-3. Grab the footsteps and place it in the footsteps audioclips after putting the number of audio clips to randomly chose from
+3. Grab the footsteps and place it in the footsteps audioclips after putting the number of audio clips to randomly choose from
 
 4. Add the audio listener and change volume
 
@@ -1839,7 +1840,7 @@ To download the finished projects:
 
 6. Click on the project to open it
 
-  \* Note if you want the project at different steps for 2D click on commits or https://github.com/Zeyu-Li/Unity-Tutorial-2D/commits/master and between Feb 26, 2020 `added logo` commit to April 12, 2020 `finished Unity template game` is when various steps where completed. To download the project file at these times, click on the bracket thing (see below) and repeat above from step 2
+  \* Note if you want the project at different steps for 2D click on commits or https://github.com/Zeyu-Li/Unity-Tutorial-2D/commits/master and between Feb 26, 2020 `added logo` commit to April 12, 2020 `finished Unity template game` is when various steps were completed. To download the project file at these times, click on the bracket thing (see below) and repeat above from step 2
 
 ![history](images/history.jpg)
 
@@ -1855,7 +1856,7 @@ else for 3D, go to https://github.com/Zeyu-Li/Unity-Tutorial-3D/commits/master a
 
 #### Unity's Collab
 
-Collaborating with friends can be tough will Unity, especially with git/GitHub, but it you are careful, things could turn out fine.
+Collaborating with friends can be tough with Unity, especially with git/GitHub, but if you are careful, things could turn out fine.
 
 If you need to collaborate, the best way is to use Unity's Collab feature
 
@@ -1871,7 +1872,7 @@ However, note that this only supports 4 people (which is usually enough because 
 
 Otherwise if you are a masochistic and decide to GitHub, here are some general practices:
 
-1. Everyone should work on there own branches and work on there own scenes working towards **Prefabs** (ie one person on movement, one on moving platforms, etc.)
+1. Everyone should work on their own branches and work on their own scenes working towards **Prefabs** (ie one person on movement, one on moving platforms, etc.)
 2. Optionally, have one person on the master (final) level to peace it together
 3. Use [this](https://github.com/github/gitignore/blob/master/Unity.gitignore) gitignore or clone from my projects on GitHub
 4. Have the core gameplay done first (especially at a Game Jam)
